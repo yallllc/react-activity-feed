@@ -19,7 +19,7 @@ declare type Props = {
     /** Override child reaction delete request */
     doChildReactionDeleteRequest?: (id: string) => unknown;
     /** Override reactions filter request */
-    doReactionsFilterRequest?: (options: {}) => Promise<Object>;
+    doReactionsFilterRequest?: (options: {}) => Promise<any>;
 };
 /**
  * Shows the detail of a single activity

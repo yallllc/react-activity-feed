@@ -22,14 +22,14 @@ declare type ReactComponentClass = Component<any>;
 export declare type ReactComponentFunction = (props: any) => ReactElement | boolean | number | string | undefined;
 export declare type ReactElementCreator = ReactComponentClass | ReactComponentFunction;
 export declare type RenderableButNotElement = (ReactElementCreator | boolean | number | string) | undefined;
-export declare type Renderable = RenderableButNotElement | ReactElement<any>;
+export declare type Renderable = RenderableButNotElement | ReactElement<any> | React.ElementType<any>;
 export declare type BaseActivityResponse = ActivityResponse<{}, {}>;
 export declare type BaseActivityGroupResponse = ActivityGroupResponse<{}, {}>;
 export declare type BaseAppCtx = AppCtx<{}>;
 export declare type BaseFeedCtx = FeedCtx;
 export declare type BaseClient = StreamClient;
 export declare type BaseReaction = ReactionResponse<{}, {}>;
-export declare type BaseReactionMap = ReactionKindMap<Object, Object>;
+export declare type BaseReactionMap = ReactionKindMap<object, object>;
 export declare type BaseUserResponse = StreamUserResponse<{}>;
 export declare type UserData = {
     name?: string;
@@ -95,7 +95,7 @@ export declare type Trigger = {
             text: string;
             caretPosition: 'start' | 'end' | 'next' | number;
         } | string | null;
-        dataProvider: (token: string) => Promise<Array<Object | string>> | Array<Object | string>;
+        dataProvider: (token: string) => Promise<Array<object | string>> | Array<object | string>;
         allowWhitespace?: boolean;
         afterWhitespace?: boolean;
         component: ReactElement<any>;

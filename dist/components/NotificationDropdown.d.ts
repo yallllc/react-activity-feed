@@ -56,20 +56,18 @@ declare type Props = {
 export default class NotificationDropdown extends React.Component<Props> {
     static defaultProps: {
         feedGroup: string;
-        Group: {
-            (props: any): JSX.Element;
-            displayName: any;
-        };
+        Group: React.FC<Pick<{
+            activityGroup: any;
+            onClickNotification?: (activityGroup: import("../getstreamCustomTypes").ActivityGroupResponse<{}, {}>) => unknown;
+            onClickUser?: (input: import("../getstreamCustomTypes").UserResponse<import("../types").UserData>) => unknown;
+            onMarkAsRead?: (group: true | import("../getstreamCustomTypes").ActivityGroupResponse<{}, {}> | readonly import("../getstreamCustomTypes").ActivityGroupResponse<{}, {}>[]) => Promise<unknown>;
+        } & import("../Context").Streami18Ctx, "activityGroup" | "onClickNotification" | "onClickUser" | "onMarkAsRead">>;
         notify: boolean;
-        Notifier: {
-            (props: any): JSX.Element;
-            displayName: any;
-        };
+        Notifier: React.FC<Pick<import("./NewActivitiesNotification").Props, "adds" | "deletes" | "labelSingle" | "labelPlural" | "labelFunction" | "onClick">>;
         Paginator: typeof LoadMorePaginator;
-        Placeholder: {
-            (props: any): JSX.Element;
-            displayName: any;
-        };
+        Placeholder: React.FC<Pick<{
+            text: string;
+        } & import("../Context").Streami18Ctx, "text">>;
         width: number;
     };
     render(): JSX.Element;

@@ -1,4 +1,4 @@
-/// <reference types="react" />
+import React from 'react';
 import { Streami18Ctx } from '../Context';
 export declare type Props = Streami18Ctx & {
     adds: Array<{}>;
@@ -16,8 +16,5 @@ export declare type Props = Streami18Ctx & {
     }) => string | null;
     onClick?: () => unknown;
 };
-declare const _default: {
-    (props: any): JSX.Element;
-    displayName: any;
-};
+declare const _default: React.FC<Props>;
 export default _default;

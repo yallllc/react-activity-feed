@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { Streami18Ctx } from '../Context';
 import { Renderable } from '../types';
 export declare type Props = {
     username: string | null | undefined;
@@ -12,9 +11,6 @@ export declare type Props = {
     follow?: boolean;
     Right?: Renderable;
     AfterUsername?: React.ReactNode;
-} & Streami18Ctx;
-declare const _default: {
-    (props: any): JSX.Element;
-    displayName: any;
 };
+declare const _default: React.FC<Props>;
 export default _default;

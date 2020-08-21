@@ -1,6 +1,5 @@
-/// <reference types="react" />
+import React from 'react';
 import { Comment } from '../types';
-import { Streami18Ctx } from '../Context';
 export declare type Props = {
     comment: Comment;
     onClickUser?: (input: any | null | undefined) => unknown;
@@ -8,9 +7,6 @@ export declare type Props = {
     onClickHashtag?: (word: string) => unknown;
     /** Handler for any routing you may do on clicks on Mentions */
     onClickMention?: (word: string) => unknown;
-} & Streami18Ctx;
-declare const _default: {
-    (props: any): JSX.Element;
-    displayName: any;
 };
+declare const _default: React.FC<Props>;
 export default _default;

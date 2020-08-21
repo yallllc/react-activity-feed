@@ -31513,9 +31513,13 @@
 	  tDateTimeParser: function tDateTimeParser(input) {
 	    return dayjs_min(input);
 	  }
-	});
+	}); // It's necessary to pass the component's external props without
+	// a Streami18Ctx union (O = Original Props) so we can return that
+	// type directly here, due to the fact that generated ts declarations
+	// were not exporting optionals when using Omit<P, keyof Streami18Ctx>.
+
 	function withTranslationContext(OriginalComponent) {
-	  var ContextAwareComponent = function ContextComponent(props) {
+	  var ContextAwareComponent = function ContextAwareComponent(props) {
 	    return /*#__PURE__*/React.createElement(TranslationContext.Consumer, null, function (translationContext) {
 	      return OriginalComponent && /*#__PURE__*/React.createElement(OriginalComponent, _extends_1({}, translationContext, props));
 	    });

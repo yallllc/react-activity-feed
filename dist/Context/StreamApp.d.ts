@@ -15,10 +15,7 @@ export declare const TranslationContext: React.Context<{
     t: (msg: any) => any;
     tDateTimeParser: (input: any) => Dayjs.Dayjs;
 }>;
-export declare function withTranslationContext(OriginalComponent: React.ComponentType<any>): {
-    (props: any): JSX.Element;
-    displayName: any;
-};
+export declare function withTranslationContext<O>(OriginalComponent: React.ComponentType): React.FC<O>;
 export declare type AppCtx<UserData> = {
     client: StreamClient;
     user: User;
@@ -70,7 +67,7 @@ declare type StreamAppState<UserData> = AppCtx<UserData> & Streami18Ctx;
  * Manages the connection with Stream. Any components that should talk to
  * Stream should be a child of this component.
  */
-export declare class StreamApp extends React.Component<StreamAppProps<Object>, StreamAppState<Object>> {
+export declare class StreamApp extends React.Component<StreamAppProps<object>, StreamAppState<object>> {
     static defaultProps: {
         sharedFeeds: {
             feedGroup: string;
@@ -87,10 +84,10 @@ export declare class StreamApp extends React.Component<StreamAppProps<Object>, S
     static Consumer: (props: {
         children?: (input: AppCtx<any>) => React.ReactElement<any> | null | undefined;
     }) => JSX.Element;
-    constructor(props: StreamAppProps<Object>);
-    componentDidUpdate(prevProps: StreamAppProps<Object>): void;
+    constructor(props: StreamAppProps<object>);
+    componentDidUpdate(prevProps: StreamAppProps<object>): void;
     componentDidMount(): Promise<void>;
-    static getDerivedStateFromProps(props: StreamAppProps<Object>, state: StreamAppState<Object>): AppCtx<Object> & Streami18Ctx & {
+    static getDerivedStateFromProps(props: StreamAppProps<object>, state: StreamAppState<object>): AppCtx<object> & Streami18Ctx & {
         client: stream.StreamClient;
         user: stream.User;
         userData: stream.User;
@@ -99,9 +96,9 @@ export declare class StreamApp extends React.Component<StreamAppProps<Object>, S
         errorHandler: ErrorHandler;
         apiKey: string;
         token: string;
-        appId: string | number;
+        appId: React.ReactText;
     };
-    static initClientState: <S>(props: StreamAppProps<Object>, state: S) => S & {
+    static initClientState: <S>(props: StreamAppProps<object>, state: S) => S & {
         client: stream.StreamClient;
         user: stream.User;
         userData: stream.User;
@@ -110,7 +107,7 @@ export declare class StreamApp extends React.Component<StreamAppProps<Object>, S
         errorHandler: ErrorHandler;
         apiKey: string;
         token: string;
-        appId: string | number;
+        appId: React.ReactText;
     };
     getUserInfo: () => Promise<void>;
     render(): JSX.Element;

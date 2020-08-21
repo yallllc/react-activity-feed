@@ -16,10 +16,11 @@ declare type Props = {
 };
 export default class LoadMorePaginator extends React.Component<Props> {
     static defaultProps: {
-        LoadMoreButton: {
-            (props: any): JSX.Element;
-            displayName: any;
-        };
+        LoadMoreButton: React.FC<Pick<{
+            onClick: () => unknown;
+            refreshing: boolean;
+            children: React.ReactNode;
+        } & import("..").Streami18Ctx, "onClick" | "refreshing" | "children">>;
     };
     render(): JSX.Element;
 }
