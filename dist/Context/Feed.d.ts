@@ -63,7 +63,7 @@ export declare type FeedProps = {
     analyticsLocation?: string;
 };
 export declare class Feed extends React.Component<FeedProps> {
-    _appCtxWrapperFunc: (appCtx: AppCtx<any>) => JSX.Element;
+    _appCtxWrapperFunc: (appCtx: AppCtx) => JSX.Element;
     render(): JSX.Element;
 }
 export declare type FeedInnerProps = FeedProps & BaseAppCtx;

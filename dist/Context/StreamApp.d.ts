@@ -1,11 +1,10 @@
-import * as React from 'react';
-import stream from 'getstream';
-import { StreamClient, User } from 'getstream';
-import { ErrorHandler } from '../types';
-import { FeedManager } from './FeedManager';
-import { FeedProps } from './Feed';
 import Dayjs from 'dayjs';
+import stream, { StreamClient, User } from 'getstream';
+import * as React from 'react';
 import { Streami18n } from '../Streami18n';
+import { ErrorHandler, UserData } from '../types';
+import { FeedProps } from './Feed';
+import { FeedManager } from './FeedManager';
 export declare const StreamContext: React.Context<{
     changedUserData: () => void;
     sharedFeedManagers: {};
@@ -16,10 +15,10 @@ export declare const TranslationContext: React.Context<{
     tDateTimeParser: (input: any) => Dayjs.Dayjs;
 }>;
 export declare function withTranslationContext<O>(OriginalComponent: React.ComponentType): React.FC<O>;
-export declare type AppCtx<UserData> = {
+export declare type AppCtx<Data = UserData> = {
     client: StreamClient;
     user: User;
-    userData: UserData | null | undefined;
+    userData: Data | null | undefined;
     changedUserData: () => void;
     changeNotificationCounts?: any;
     analyticsClient?: any;
@@ -32,7 +31,7 @@ export declare type Streami18Ctx = {
     t: (msg: string, data?: object) => string;
     tDateTimeParser: (input?: string | number) => Dayjs.Dayjs;
 };
-declare type StreamAppProps<UserData> = {
+declare type StreamAppProps<Data = UserData> = {
     /** The ID of your app, can be found on the [Stream dashboard](https://getstream.io/dashboard) */
     appId: string | number;
     /** The API key for your app, can be found on the [Stream dashboard](https://getstream.io/dashboard) */
@@ -55,19 +54,23 @@ declare type StreamAppProps<UserData> = {
      */
     sharedFeeds?: Array<FeedProps>;
     /** The data a user should get when no data is present in stream for this user yet */
-    defaultUserData?: UserData;
+    defaultUserData?: Data;
     /** A callback to handle errors produced by the components. This should
      * probably hook into your own notification system. */
     errorHandler?: ErrorHandler;
     i18nInstance?: Streami18n;
     children?: React.ReactNode;
 };
-declare type StreamAppState<UserData> = AppCtx<UserData> & Streami18Ctx;
+declare type StreamAppState = AppCtx & Streami18Ctx & {
+    apiKey: string;
+    token: string;
+    appId: string | number;
+};
 /**
  * Manages the connection with Stream. Any components that should talk to
  * Stream should be a child of this component.
  */
-export declare class StreamApp extends React.Component<StreamAppProps<object>, StreamAppState<object>> {
+export declare class StreamApp extends React.Component<StreamAppProps, StreamAppState> {
     static defaultProps: {
         sharedFeeds: {
             feedGroup: string;
@@ -82,15 +85,19 @@ export declare class StreamApp extends React.Component<StreamAppProps<object>, S
         errorHandler: (error: Error, type: import("../types").FlowRequestTypes, detail: any) => void;
     };
     static Consumer: (props: {
-        children?: (input: AppCtx<any>) => React.ReactElement<any> | null | undefined;
+        children?: (input: AppCtx) => React.ReactNode;
     }) => JSX.Element;
-    constructor(props: StreamAppProps<object>);
-    componentDidUpdate(prevProps: StreamAppProps<object>): void;
+    constructor(props: StreamAppProps);
+    componentDidUpdate(prevProps: StreamAppProps): void;
     componentDidMount(): Promise<void>;
-    static getDerivedStateFromProps(props: StreamAppProps<object>, state: StreamAppState<object>): AppCtx<object> & Streami18Ctx & {
+    static getDerivedStateFromProps(props: StreamAppProps, state: StreamAppState): AppCtx<UserData> & Streami18Ctx & {
+        apiKey: string;
+        token: string;
+        appId: React.ReactText;
+    } & {
         client: stream.StreamClient;
         user: stream.User;
-        userData: stream.User;
+        userData: any;
         analyticsClient: any;
         sharedFeedManagers: {};
         errorHandler: ErrorHandler;
@@ -98,10 +105,10 @@ export declare class StreamApp extends React.Component<StreamAppProps<object>, S
         token: string;
         appId: React.ReactText;
     };
-    static initClientState: <S>(props: StreamAppProps<object>, state: S) => S & {
+    static initClientState: <S>(props: StreamAppProps, state: S) => S & {
         client: stream.StreamClient;
         user: stream.User;
-        userData: stream.User;
+        userData: any;
         analyticsClient: any;
         sharedFeedManagers: {};
         errorHandler: ErrorHandler;

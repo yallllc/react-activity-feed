@@ -1,18 +1,8 @@
 import _extends from '@babel/runtime/helpers/extends';
-import React, { isValidElement, createElement, Fragment, createContext, Component, createRef, PureComponent } from 'react';
-import stream from 'getstream';
-import StreamAnalytics from 'stream-analytics';
-import immutable from 'immutable';
-import _isEqual from 'lodash/isEqual';
-import _isPlainObject from 'lodash/isPlainObject';
-import _remove from 'lodash/remove';
-import URL from 'url-parse';
-import anchorme from 'anchorme';
-import _truncate from 'lodash/truncate';
-import twitter from 'twitter-text';
 import Dayjs from 'dayjs';
-import utc from 'dayjs/plugin/utc';
-import minMax from 'dayjs/plugin/minMax';
+import stream from 'getstream';
+import React, { isValidElement, createElement, Fragment, createContext, Component, createRef, PureComponent } from 'react';
+import StreamAnalytics from 'stream-analytics';
 import i18n from 'i18next';
 import calendar from 'dayjs/plugin/calendar';
 import updateLocale from 'dayjs/plugin/updateLocale';
@@ -26,6 +16,16 @@ import 'dayjs/locale/fr';
 import 'dayjs/locale/hi';
 import 'dayjs/locale/it';
 import 'dayjs/locale/en';
+import immutable from 'immutable';
+import _isEqual from 'lodash/isEqual';
+import _isPlainObject from 'lodash/isPlainObject';
+import _remove from 'lodash/remove';
+import URL from 'url-parse';
+import anchorme from 'anchorme';
+import _truncate from 'lodash/truncate';
+import twitter from 'twitter-text';
+import utc from 'dayjs/plugin/utc';
+import minMax from 'dayjs/plugin/minMax';
 import { IconButton, FileIcon, LoadingIndicator, Thumbnail, ImageDropzone, ImagePreviewer, FilePreviewer, ImageUploadButton, FileUploadButton } from 'react-file-utils';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlayCircle, faPauseCircle, faBookmark } from '@fortawesome/free-regular-svg-icons';
@@ -162,6 +162,717 @@ function __spread() {
         ar = ar.concat(__read(arguments[i]));
     return ar;
 }
+
+var handleError = function handleError(error, type, detail) {
+  console.warn(error, type, detail);
+};
+
+var Details = "Details";
+var Post = "Post";
+var enTranslations = {
+	"1 comment": "1 comment",
+	"1 like": "1 like",
+	"1 repost": "1 repost",
+	Details: Details,
+	"Load activities": "Load activities",
+	"Load more": "Load more",
+	"New Post": "New Post",
+	"No data to display...": "No data to display...",
+	"Pick your emoji": "Pick your emoji",
+	Post: Post,
+	"Start Typing...": "Start Typing...",
+	"Type your post...": "Type your post...",
+	"You have 1 new notification": "You have 1 new notification",
+	"You have {{ notificationCount }} new notifications": "You have {{ notificationCount }} new notifications",
+	"{{ actorName }} and 1 other commented on your {{ activityVerb }}": "{{ actorName }} and 1 other commented on your {{ activityVerb }}",
+	"{{ actorName }} and 1 other followed you": "{{ actorName }} and 1 other followed you",
+	"{{ actorName }} and 1 other liked your {{ activityVerb }}": "{{ actorName }} and 1 other liked your {{ activityVerb }}",
+	"{{ actorName }} and 1 other reposted your {{ activityVerb }}": "{{ actorName }} and 1 other reposted your {{ activityVerb }}",
+	"{{ actorName }} and {{ countOtherActors }} others commented on your {{ activityVerb }}": "{{ actorName }} and {{ countOtherActors }} others commented on your {{ activityVerb }}",
+	"{{ actorName }} and {{ countOtherActors }} others followed you": "{{ actorName }} and {{ countOtherActors }} others followed you",
+	"{{ actorName }} and {{ countOtherActors }} others liked your {{ activityVerb }}": "{{ actorName }} and {{ countOtherActors }} others liked your {{ activityVerb }}",
+	"{{ actorName }} and {{ countOtherActors }} others reposted your {{ activityVerb }}": "{{ actorName }} and {{ countOtherActors }} others reposted your {{ activityVerb }}",
+	"{{ actorName }} commented on your {{ activityVerb }}": "{{ actorName }} commented on your {{ activityVerb }}",
+	"{{ actorName }} followed you": "{{ actorName }} followed you",
+	"{{ actorName }} liked your {{ activityVerb }}": "{{ actorName }} liked your {{ activityVerb }}",
+	"{{ actorName }} reposted your {{ activityVerb }}": "{{ actorName }} reposted your {{ activityVerb }}",
+	"{{ countComments }} comments": "{{ countComments }} comments",
+	"{{ countLikes }} likes": "{{ countLikes }} likes",
+	"{{ countReposts }} reposts": "{{ countReposts }} reposts"
+};
+
+var Details$1 = "Details";
+var Post$1 = "";
+var nlTranslations = {
+	"1 comment": "",
+	"1 like": "",
+	"1 repost": "",
+	Details: Details$1,
+	"Load activities": "",
+	"Load more": "",
+	"New Post": "",
+	"No data to display...": "",
+	"Pick your emoji": "",
+	Post: Post$1,
+	"Start Typing...": "",
+	"Type your post...": "",
+	"You have 1 new notification": "",
+	"You have {{ notificationCount }} new notifications": "",
+	"{{ actorName }} and 1 other commented on your {{ activityVerb }}": "",
+	"{{ actorName }} and 1 other followed you": "",
+	"{{ actorName }} and 1 other liked your {{ activityVerb }}": "",
+	"{{ actorName }} and 1 other reposted your {{ activityVerb }}": "",
+	"{{ actorName }} and {{ countOtherActors }} others commented on your {{ activityVerb }}": "",
+	"{{ actorName }} and {{ countOtherActors }} others followed you": "",
+	"{{ actorName }} and {{ countOtherActors }} others liked your {{ activityVerb }}": "",
+	"{{ actorName }} and {{ countOtherActors }} others reposted your {{ activityVerb }}": "",
+	"{{ actorName }} commented on your {{ activityVerb }}": "",
+	"{{ actorName }} followed you": "",
+	"{{ actorName }} liked your {{ activityVerb }}": "",
+	"{{ actorName }} reposted your {{ activityVerb }}": "",
+	"{{ countComments }} comments": "",
+	"{{ countLikes }} likes": "",
+	"{{ countReposts }} reposts": ""
+};
+
+var Details$2 = "Детали";
+var Post$2 = "";
+var ruTranslations = {
+	"1 comment": "",
+	"1 like": "",
+	"1 repost": "",
+	Details: Details$2,
+	"Load activities": "",
+	"Load more": "",
+	"New Post": "",
+	"No data to display...": "",
+	"Pick your emoji": "",
+	Post: Post$2,
+	"Start Typing...": "",
+	"Type your post...": "",
+	"You have 1 new notification": "",
+	"You have {{ notificationCount }} new notifications": "",
+	"{{ actorName }} and 1 other commented on your {{ activityVerb }}": "",
+	"{{ actorName }} and 1 other followed you": "",
+	"{{ actorName }} and 1 other liked your {{ activityVerb }}": "",
+	"{{ actorName }} and 1 other reposted your {{ activityVerb }}": "",
+	"{{ actorName }} and {{ countOtherActors }} others commented on your {{ activityVerb }}": "",
+	"{{ actorName }} and {{ countOtherActors }} others followed you": "",
+	"{{ actorName }} and {{ countOtherActors }} others liked your {{ activityVerb }}": "",
+	"{{ actorName }} and {{ countOtherActors }} others reposted your {{ activityVerb }}": "",
+	"{{ actorName }} commented on your {{ activityVerb }}": "",
+	"{{ actorName }} followed you": "",
+	"{{ actorName }} liked your {{ activityVerb }}": "",
+	"{{ actorName }} reposted your {{ activityVerb }}": "",
+	"{{ countComments }} comments": "",
+	"{{ countLikes }} likes": "",
+	"{{ countReposts }} reposts": ""
+};
+
+var Details$3 = "Detaylar";
+var Post$3 = "";
+var trTranslations = {
+	"1 comment": "",
+	"1 like": "",
+	"1 repost": "",
+	Details: Details$3,
+	"Load activities": "",
+	"Load more": "",
+	"New Post": "",
+	"No data to display...": "",
+	"Pick your emoji": "",
+	Post: Post$3,
+	"Start Typing...": "",
+	"Type your post...": "",
+	"You have 1 new notification": "",
+	"You have {{ notificationCount }} new notifications": "",
+	"{{ actorName }} and 1 other commented on your {{ activityVerb }}": "",
+	"{{ actorName }} and 1 other followed you": "",
+	"{{ actorName }} and 1 other liked your {{ activityVerb }}": "",
+	"{{ actorName }} and 1 other reposted your {{ activityVerb }}": "",
+	"{{ actorName }} and {{ countOtherActors }} others commented on your {{ activityVerb }}": "",
+	"{{ actorName }} and {{ countOtherActors }} others followed you": "",
+	"{{ actorName }} and {{ countOtherActors }} others liked your {{ activityVerb }}": "",
+	"{{ actorName }} and {{ countOtherActors }} others reposted your {{ activityVerb }}": "",
+	"{{ actorName }} commented on your {{ activityVerb }}": "",
+	"{{ actorName }} followed you": "",
+	"{{ actorName }} liked your {{ activityVerb }}": "",
+	"{{ actorName }} reposted your {{ activityVerb }}": "",
+	"{{ countComments }} comments": "",
+	"{{ countLikes }} likes": "",
+	"{{ countReposts }} reposts": ""
+};
+
+var Details$4 = "Voir les commentaires";
+var Post$4 = "";
+var frTranslations = {
+	"1 comment": "",
+	"1 like": "",
+	"1 repost": "",
+	Details: Details$4,
+	"Load activities": "",
+	"Load more": "",
+	"New Post": "",
+	"No data to display...": "",
+	"Pick your emoji": "",
+	Post: Post$4,
+	"Start Typing...": "",
+	"Type your post...": "",
+	"You have 1 new notification": "",
+	"You have {{ notificationCount }} new notifications": "",
+	"{{ actorName }} and 1 other commented on your {{ activityVerb }}": "",
+	"{{ actorName }} and 1 other followed you": "",
+	"{{ actorName }} and 1 other liked your {{ activityVerb }}": "",
+	"{{ actorName }} and 1 other reposted your {{ activityVerb }}": "",
+	"{{ actorName }} and {{ countOtherActors }} others commented on your {{ activityVerb }}": "",
+	"{{ actorName }} and {{ countOtherActors }} others followed you": "",
+	"{{ actorName }} and {{ countOtherActors }} others liked your {{ activityVerb }}": "",
+	"{{ actorName }} and {{ countOtherActors }} others reposted your {{ activityVerb }}": "",
+	"{{ actorName }} commented on your {{ activityVerb }}": "",
+	"{{ actorName }} followed you": "",
+	"{{ actorName }} liked your {{ activityVerb }}": "",
+	"{{ actorName }} reposted your {{ activityVerb }}": "",
+	"{{ countComments }} comments": "",
+	"{{ countLikes }} likes": "",
+	"{{ countReposts }} reposts": ""
+};
+
+var Details$5 = "डिटेल्स";
+var Post$5 = "";
+var hiTranslations = {
+	"1 comment": "",
+	"1 like": "",
+	"1 repost": "",
+	Details: Details$5,
+	"Load activities": "",
+	"Load more": "",
+	"New Post": "",
+	"No data to display...": "",
+	"Pick your emoji": "",
+	Post: Post$5,
+	"Start Typing...": "",
+	"Type your post...": "",
+	"You have 1 new notification": "",
+	"You have {{ notificationCount }} new notifications": "",
+	"{{ actorName }} and 1 other commented on your {{ activityVerb }}": "",
+	"{{ actorName }} and 1 other followed you": "",
+	"{{ actorName }} and 1 other liked your {{ activityVerb }}": "",
+	"{{ actorName }} and 1 other reposted your {{ activityVerb }}": "",
+	"{{ actorName }} and {{ countOtherActors }} others commented on your {{ activityVerb }}": "",
+	"{{ actorName }} and {{ countOtherActors }} others followed you": "",
+	"{{ actorName }} and {{ countOtherActors }} others liked your {{ activityVerb }}": "",
+	"{{ actorName }} and {{ countOtherActors }} others reposted your {{ activityVerb }}": "",
+	"{{ actorName }} commented on your {{ activityVerb }}": "",
+	"{{ actorName }} followed you": "",
+	"{{ actorName }} liked your {{ activityVerb }}": "",
+	"{{ actorName }} reposted your {{ activityVerb }}": "",
+	"{{ countComments }} comments": "",
+	"{{ countLikes }} likes": "",
+	"{{ countReposts }} reposts": ""
+};
+
+var Details$6 = "Dettagli";
+var Post$6 = "";
+var itTranslations = {
+	"1 comment": "",
+	"1 like": "",
+	"1 repost": "",
+	Details: Details$6,
+	"Load activities": "",
+	"Load more": "",
+	"New Post": "",
+	"No data to display...": "",
+	"Pick your emoji": "",
+	Post: Post$6,
+	"Start Typing...": "",
+	"Type your post...": "",
+	"You have 1 new notification": "",
+	"You have {{ notificationCount }} new notifications": "",
+	"{{ actorName }} and 1 other commented on your {{ activityVerb }}": "",
+	"{{ actorName }} and 1 other followed you": "",
+	"{{ actorName }} and 1 other liked your {{ activityVerb }}": "",
+	"{{ actorName }} and 1 other reposted your {{ activityVerb }}": "",
+	"{{ actorName }} and {{ countOtherActors }} others commented on your {{ activityVerb }}": "",
+	"{{ actorName }} and {{ countOtherActors }} others followed you": "",
+	"{{ actorName }} and {{ countOtherActors }} others liked your {{ activityVerb }}": "",
+	"{{ actorName }} and {{ countOtherActors }} others reposted your {{ activityVerb }}": "",
+	"{{ actorName }} commented on your {{ activityVerb }}": "",
+	"{{ actorName }} followed you": "",
+	"{{ actorName }} liked your {{ activityVerb }}": "",
+	"{{ actorName }} reposted your {{ activityVerb }}": "",
+	"{{ countComments }} comments": "",
+	"{{ countLikes }} likes": "",
+	"{{ countReposts }} reposts": ""
+};
+
+var defaultNS = 'translation';
+var defaultLng = 'en';
+Dayjs.extend(updateLocale);
+Dayjs.updateLocale('nl', {
+  calendar: {
+    sameDay: '[vandaag om] LT',
+    nextDay: '[morgen om] LT',
+    nextWeek: 'dddd [om] LT',
+    lastDay: '[gisteren om] LT',
+    lastWeek: '[afgelopen] dddd [om] LT',
+    sameElse: 'L'
+  }
+});
+Dayjs.updateLocale('it', {
+  calendar: {
+    sameDay: '[Oggi alle] LT',
+    nextDay: '[Domani alle] LT',
+    nextWeek: 'dddd [alle] LT',
+    lastDay: '[Ieri alle] LT',
+    lastWeek: '[lo scorso] dddd [alle] LT',
+    sameElse: 'L'
+  }
+});
+Dayjs.updateLocale('hi', {
+  calendar: {
+    sameDay: '[आज] LT',
+    nextDay: '[कल] LT',
+    nextWeek: 'dddd, LT',
+    lastDay: '[कल] LT',
+    lastWeek: '[पिछले] dddd, LT',
+    sameElse: 'L'
+  },
+  // Hindi notation for meridiems are quite fuzzy in practice. While there exists
+  // a rigid notion of a 'Pahar' it is not used as rigidly in modern Hindi.
+  meridiemParse: /रात|सुबह|दोपहर|शाम/,
+  meridiemHour: function meridiemHour(hour, meridiem) {
+    if (hour === 12) {
+      hour = 0;
+    }
+
+    if (meridiem === 'रात') {
+      return hour < 4 ? hour : hour + 12;
+    } else if (meridiem === 'सुबह') {
+      return hour;
+    } else if (meridiem === 'दोपहर') {
+      return hour >= 10 ? hour : hour + 12;
+    } else if (meridiem === 'शाम') {
+      return hour + 12;
+    }
+  },
+  meridiem: function meridiem(hour) {
+    if (hour < 4) {
+      return 'रात';
+    } else if (hour < 10) {
+      return 'सुबह';
+    } else if (hour < 17) {
+      return 'दोपहर';
+    } else if (hour < 20) {
+      return 'शाम';
+    } else {
+      return 'रात';
+    }
+  }
+});
+Dayjs.updateLocale('fr', {
+  calendar: {
+    sameDay: '[Aujourd’hui à] LT',
+    nextDay: '[Demain à] LT',
+    nextWeek: 'dddd [à] LT',
+    lastDay: '[Hier à] LT',
+    lastWeek: 'dddd [dernier à] LT',
+    sameElse: 'L'
+  }
+});
+Dayjs.updateLocale('tr', {
+  calendar: {
+    sameDay: '[bugün saat] LT',
+    nextDay: '[yarın saat] LT',
+    nextWeek: '[gelecek] dddd [saat] LT',
+    lastDay: '[dün] LT',
+    lastWeek: '[geçen] dddd [saat] LT',
+    sameElse: 'L'
+  }
+});
+Dayjs.updateLocale('ru', {
+  calendar: {
+    sameDay: '[Сегодня, в] LT',
+    nextDay: '[Завтра, в] LT',
+    lastDay: '[Вчера, в] LT'
+  }
+});
+var en_locale = {
+  weekdays: 'Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday'.split('_'),
+  months: 'January_February_March_April_May_June_July_August_September_October_November_December'.split('_')
+};
+var defaultStreami18nOptions = {
+  language: 'en',
+  disableDateTimeTranslations: false,
+  debug: false,
+  logger: function logger(msg) {
+    return console.warn(msg);
+  },
+  dayjsLocaleConfigForLanguage: null,
+  translationsForLanguage: null,
+  DateTimeParser: Dayjs
+};
+
+var Streami18n =
+/** @class */
+function () {
+  /**
+   * Contructor accepts following options:
+   *  - language (String) default: 'en'
+   *    Language code e.g., en, tr
+   *
+   *  - translationsForLanguage (object)
+   *    Translations object. Please check src/i18n/en.json for example.
+   *
+   *  - disableDateTimeTranslations (boolean) default: false
+   *    Disable translations for datetimes
+   *
+   *  - debug (boolean) default: false
+   *    Enable debug mode in internal i18n class
+   *
+   *  - logger (function) default: () => {}
+   *    Logger function to log warnings/errors from this class
+   *
+   *  - dayjsLocaleConfigForLanguage (object) default: 'enConfig'
+   *    [Config object](https://momentjs.com/docs/#/i18n/changing-locale/) for internal moment object,
+   *    corresponding to language (param)
+   *
+   *  - DateTimeParser (function) Moment or Dayjs instance/function.
+   *    Make sure to load all the required locales in this Moment or Dayjs instance that you will be provide to Streami18n
+   *
+   * @param {*} options
+   */
+  function Streami18n(options) {
+    var _a, _b, _c, _d, _e, _f, _g, _h, _j;
+
+    var _this = this;
+
+    if (options === void 0) {
+      options = {};
+    }
+
+    this.i18nInstance = i18n.createInstance();
+    this.Dayjs = null;
+
+    this.setLanguageCallback = function () {
+      return null;
+    };
+
+    this.initialized = false;
+    this.isCustomDateTimeParser = false;
+    this.t = null;
+    this.tDateTimeParser = null;
+    this.translations = {
+      en: (_a = {}, _a[defaultNS] = enTranslations, _a),
+      nl: (_b = {}, _b[defaultNS] = nlTranslations, _b),
+      ru: (_c = {}, _c[defaultNS] = ruTranslations, _c),
+      tr: (_d = {}, _d[defaultNS] = trTranslations, _d),
+      fr: (_e = {}, _e[defaultNS] = frTranslations, _e),
+      hi: (_f = {}, _f[defaultNS] = hiTranslations, _f),
+      it: (_g = {}, _g[defaultNS] = itTranslations, _g)
+    };
+    /**
+     * dayjs.updateLocale('nl') also changes the global locale. We don't want to do that
+     * when user calls registerTranslation() function. So intead we will store the locale configs
+     * given to registerTranslation() function in `dayjsLocales` object, and register the required locale
+     * with moment, when setLanguage is called.
+     * */
+
+    this.dayjsLocales = {};
+
+    this.localeExists = function (language) {
+      if (_this.isCustomDateTimeParser) return true;
+      return Object.keys(Dayjs.Ls).indexOf(language) > -1;
+    };
+
+    this.validateCurrentLanguage = function () {
+      var availableLanguages = Object.keys(_this.translations);
+
+      if (availableLanguages.indexOf(_this.currentLanguage) === -1) {
+        _this.logger("Streami18n: '" + _this.currentLanguage + "' language is not registered." + (" Please make sure to call streami18n.registerTranslation('" + _this.currentLanguage + "', {...}) or ") + ("use one the built-in supported languages - " + _this.getAvailableLanguages()));
+
+        _this.currentLanguage = defaultLng;
+      }
+    };
+    /** Returns an instance of i18next used within this class instance */
+
+
+    this.geti18Instance = function () {
+      return _this.i18nInstance;
+    };
+    /** Returns list of available languages. */
+
+
+    this.getAvailableLanguages = function () {
+      return Object.keys(_this.translations);
+    };
+    /** Returns all the translation dictionary for all inbuilt-languages */
+
+
+    this.getTranslations = function () {
+      return _this.translations;
+    };
+
+    var finalOptions = __assign(__assign({}, defaultStreami18nOptions), options); // Prepare the i18next configuration.
+
+
+    this.logger = finalOptions.logger;
+    this.currentLanguage = finalOptions.language;
+    this.DateTimeParser = finalOptions.DateTimeParser;
+
+    try {
+      // This is a shallow check to see if given parser is instance of Dayjs.
+      // For some reason Dayjs.isDayjs(this.DateTimeParser()) doesn't work.
+      if (this.DateTimeParser && this.DateTimeParser.extend) {
+        this.DateTimeParser.extend(LocalizedFormat);
+        this.DateTimeParser.extend(calendar);
+        this.DateTimeParser.extend(localeData);
+        this.DateTimeParser.extend(relativeTime);
+      }
+    } catch (error) {
+      throw Error("Streami18n: Looks like you wanted to provide Dayjs instance, but something went wrong while adding plugins - " + error);
+    }
+
+    this.isCustomDateTimeParser = !!options.DateTimeParser;
+    var translationsForLanguage = finalOptions.translationsForLanguage;
+
+    if (translationsForLanguage) {
+      this.translations[this.currentLanguage] = (_h = {}, _h[defaultNS] = translationsForLanguage, _h);
+    } // If translations don't exist for given language, then set it as empty object.
+
+
+    if (!this.translations[this.currentLanguage]) {
+      this.translations[this.currentLanguage] = (_j = {}, _j[defaultNS] = {}, _j);
+    }
+
+    this.i18nextConfig = {
+      nsSeparator: false,
+      keySeparator: false,
+      fallbackLng: false,
+      debug: finalOptions.debug,
+      lng: this.currentLanguage,
+      interpolation: {
+        escapeValue: false
+      },
+      parseMissingKeyHandler: function parseMissingKeyHandler(key) {
+        _this.logger("Streami18n: Missing translation for key: " + key);
+
+        return key;
+      }
+    };
+    this.validateCurrentLanguage();
+    var dayjsLocaleConfigForLanguage = finalOptions.dayjsLocaleConfigForLanguage;
+
+    if (dayjsLocaleConfigForLanguage) {
+      this.addOrUpdateLocale(this.currentLanguage, __assign({}, dayjsLocaleConfigForLanguage));
+    } else if (!this.localeExists(this.currentLanguage)) {
+      this.logger("Streami18n: Streami18n(...) - Locale config for " + this.currentLanguage + " does not exist in momentjs." + ("Please import the locale file using \"import 'moment/locale/" + this.currentLanguage + "';\" in your app or ") + "register the locale config with Streami18n using registerTranslation(language, translation, customDayjsLocale)");
+    }
+
+    this.tDateTimeParser = function (timestamp) {
+      if (finalOptions.disableDateTimeTranslations || !_this.localeExists(_this.currentLanguage)) {
+        return _this.DateTimeParser(timestamp).locale(defaultLng);
+      }
+
+      return _this.DateTimeParser(timestamp).locale(_this.currentLanguage);
+    };
+  }
+  /**
+   * Initializes the i18next instance with configuration (which enables natural language as default keys)
+   */
+
+
+  Streami18n.prototype.init = function () {
+    return __awaiter(this, void 0, void 0, function () {
+      var _a, e_1;
+
+      return __generator(this, function (_b) {
+        switch (_b.label) {
+          case 0:
+            this.validateCurrentLanguage();
+            _b.label = 1;
+
+          case 1:
+            _b.trys.push([1, 3,, 4]);
+
+            _a = this;
+            return [4
+            /*yield*/
+            , this.i18nInstance.init(__assign(__assign({}, this.i18nextConfig), {
+              resources: this.translations,
+              lng: this.currentLanguage
+            }))];
+
+          case 2:
+            _a.t = _b.sent();
+            this.initialized = true;
+            return [2
+            /*return*/
+            , {
+              t: this.t,
+              tDateTimeParser: this.tDateTimeParser
+            }];
+
+          case 3:
+            e_1 = _b.sent();
+            this.logger("Something went wrong with init: " + e_1);
+            return [3
+            /*break*/
+            , 4];
+
+          case 4:
+            return [2
+            /*return*/
+            ];
+        }
+      });
+    });
+  };
+  /**
+   * Returns current version translator function.
+   */
+
+
+  Streami18n.prototype.getTranslators = function () {
+    return __awaiter(this, void 0, void 0, function () {
+      return __generator(this, function (_a) {
+        switch (_a.label) {
+          case 0:
+            if (!!this.initialized) return [3
+            /*break*/
+            , 2];
+
+            if (this.dayjsLocales[this.currentLanguage]) {
+              this.addOrUpdateLocale(this.currentLanguage, this.dayjsLocales[this.currentLanguage]);
+            }
+
+            return [4
+            /*yield*/
+            , this.init()];
+
+          case 1:
+            return [2
+            /*return*/
+            , _a.sent()];
+
+          case 2:
+            return [2
+            /*return*/
+            , {
+              t: this.t,
+              tDateTimeParser: this.tDateTimeParser
+            }];
+        }
+      });
+    });
+  };
+  /**
+   * Register translation
+   *
+   * @param {*} language
+   * @param {*} translation
+   * @param {*} customDayjsLocale
+   */
+
+
+  Streami18n.prototype.registerTranslation = function (language, translation, customDayjsLocale) {
+    var _a;
+
+    if (!translation) {
+      this.logger("Streami18n: registerTranslation(language, translation, customDayjsLocale) called without translation");
+      return;
+    }
+
+    if (!this.translations[language]) {
+      this.translations[language] = (_a = {}, _a[defaultNS] = translation, _a);
+    } else {
+      this.translations[language][defaultNS] = translation;
+    }
+
+    if (customDayjsLocale) {
+      this.dayjsLocales[language] = __assign({}, customDayjsLocale);
+    } else if (!this.localeExists(language)) {
+      this.logger("Streami18n: registerTranslation(language, translation, customDayjsLocale) - " + ("Locale config for " + language + " does not exist in Dayjs.") + ("Please import the locale file using \"import 'dayjs/locale/" + language + "';\" in your app or ") + "register the locale config with Streami18n using registerTranslation(language, translation, customDayjsLocale)");
+    }
+
+    if (this.initialized) {
+      this.i18nInstance.addResources(language, defaultNS, translation);
+    }
+  };
+
+  Streami18n.prototype.addOrUpdateLocale = function (key, config) {
+    if (this.localeExists(key)) {
+      Dayjs.updateLocale(key, __assign({}, config));
+    } else {
+      // Merging the custom locale config with en config, so missing keys can default to english.
+      Dayjs.locale(__assign({
+        name: key
+      }, __assign(__assign({}, en_locale), config)), null, true);
+    }
+  };
+  /**
+   * Changes the language.
+   * @param {*} language
+   */
+
+
+  Streami18n.prototype.setLanguage = function (language) {
+    return __awaiter(this, void 0, void 0, function () {
+      var t, e_2;
+      return __generator(this, function (_a) {
+        switch (_a.label) {
+          case 0:
+            this.currentLanguage = language;
+            if (!this.initialized) return [2
+            /*return*/
+            ];
+            _a.label = 1;
+
+          case 1:
+            _a.trys.push([1, 3,, 4]);
+
+            return [4
+            /*yield*/
+            , this.i18nInstance.changeLanguage(language)];
+
+          case 2:
+            t = _a.sent();
+
+            if (this.dayjsLocales[language]) {
+              this.addOrUpdateLocale(this.currentLanguage, this.dayjsLocales[this.currentLanguage]);
+            }
+
+            this.setLanguageCallback(t);
+            return [2
+            /*return*/
+            , t];
+
+          case 3:
+            e_2 = _a.sent();
+            this.logger("Failed to set language: " + e_2);
+            return [3
+            /*break*/
+            , 4];
+
+          case 4:
+            return [2
+            /*return*/
+            ];
+        }
+      });
+    });
+  };
+  /**
+   *
+   * @param {*} callback
+   */
+
+
+  Streami18n.prototype.registerSetLanguageCallback = function (callback) {
+    this.setLanguageCallback = callback;
+  };
+
+  return Streami18n;
+}();
 
 function createCommonjsModule(fn, basedir, module) {
 	return module = {
@@ -2592,717 +3303,6 @@ function () {
   return FeedManager;
 }();
 
-var handleError = function handleError(error, type, detail) {
-  console.warn(error, type, detail);
-};
-
-var Details = "Details";
-var Post = "Post";
-var enTranslations = {
-	"1 comment": "1 comment",
-	"1 like": "1 like",
-	"1 repost": "1 repost",
-	Details: Details,
-	"Load activities": "Load activities",
-	"Load more": "Load more",
-	"New Post": "New Post",
-	"No data to display...": "No data to display...",
-	"Pick your emoji": "Pick your emoji",
-	Post: Post,
-	"Start Typing...": "Start Typing...",
-	"Type your post...": "Type your post...",
-	"You have 1 new notification": "You have 1 new notification",
-	"You have {{ notificationCount }} new notifications": "You have {{ notificationCount }} new notifications",
-	"{{ actorName }} and 1 other commented on your {{ activityVerb }}": "{{ actorName }} and 1 other commented on your {{ activityVerb }}",
-	"{{ actorName }} and 1 other followed you": "{{ actorName }} and 1 other followed you",
-	"{{ actorName }} and 1 other liked your {{ activityVerb }}": "{{ actorName }} and 1 other liked your {{ activityVerb }}",
-	"{{ actorName }} and 1 other reposted your {{ activityVerb }}": "{{ actorName }} and 1 other reposted your {{ activityVerb }}",
-	"{{ actorName }} and {{ countOtherActors }} others commented on your {{ activityVerb }}": "{{ actorName }} and {{ countOtherActors }} others commented on your {{ activityVerb }}",
-	"{{ actorName }} and {{ countOtherActors }} others followed you": "{{ actorName }} and {{ countOtherActors }} others followed you",
-	"{{ actorName }} and {{ countOtherActors }} others liked your {{ activityVerb }}": "{{ actorName }} and {{ countOtherActors }} others liked your {{ activityVerb }}",
-	"{{ actorName }} and {{ countOtherActors }} others reposted your {{ activityVerb }}": "{{ actorName }} and {{ countOtherActors }} others reposted your {{ activityVerb }}",
-	"{{ actorName }} commented on your {{ activityVerb }}": "{{ actorName }} commented on your {{ activityVerb }}",
-	"{{ actorName }} followed you": "{{ actorName }} followed you",
-	"{{ actorName }} liked your {{ activityVerb }}": "{{ actorName }} liked your {{ activityVerb }}",
-	"{{ actorName }} reposted your {{ activityVerb }}": "{{ actorName }} reposted your {{ activityVerb }}",
-	"{{ countComments }} comments": "{{ countComments }} comments",
-	"{{ countLikes }} likes": "{{ countLikes }} likes",
-	"{{ countReposts }} reposts": "{{ countReposts }} reposts"
-};
-
-var Details$1 = "Details";
-var Post$1 = "";
-var nlTranslations = {
-	"1 comment": "",
-	"1 like": "",
-	"1 repost": "",
-	Details: Details$1,
-	"Load activities": "",
-	"Load more": "",
-	"New Post": "",
-	"No data to display...": "",
-	"Pick your emoji": "",
-	Post: Post$1,
-	"Start Typing...": "",
-	"Type your post...": "",
-	"You have 1 new notification": "",
-	"You have {{ notificationCount }} new notifications": "",
-	"{{ actorName }} and 1 other commented on your {{ activityVerb }}": "",
-	"{{ actorName }} and 1 other followed you": "",
-	"{{ actorName }} and 1 other liked your {{ activityVerb }}": "",
-	"{{ actorName }} and 1 other reposted your {{ activityVerb }}": "",
-	"{{ actorName }} and {{ countOtherActors }} others commented on your {{ activityVerb }}": "",
-	"{{ actorName }} and {{ countOtherActors }} others followed you": "",
-	"{{ actorName }} and {{ countOtherActors }} others liked your {{ activityVerb }}": "",
-	"{{ actorName }} and {{ countOtherActors }} others reposted your {{ activityVerb }}": "",
-	"{{ actorName }} commented on your {{ activityVerb }}": "",
-	"{{ actorName }} followed you": "",
-	"{{ actorName }} liked your {{ activityVerb }}": "",
-	"{{ actorName }} reposted your {{ activityVerb }}": "",
-	"{{ countComments }} comments": "",
-	"{{ countLikes }} likes": "",
-	"{{ countReposts }} reposts": ""
-};
-
-var Details$2 = "Детали";
-var Post$2 = "";
-var ruTranslations = {
-	"1 comment": "",
-	"1 like": "",
-	"1 repost": "",
-	Details: Details$2,
-	"Load activities": "",
-	"Load more": "",
-	"New Post": "",
-	"No data to display...": "",
-	"Pick your emoji": "",
-	Post: Post$2,
-	"Start Typing...": "",
-	"Type your post...": "",
-	"You have 1 new notification": "",
-	"You have {{ notificationCount }} new notifications": "",
-	"{{ actorName }} and 1 other commented on your {{ activityVerb }}": "",
-	"{{ actorName }} and 1 other followed you": "",
-	"{{ actorName }} and 1 other liked your {{ activityVerb }}": "",
-	"{{ actorName }} and 1 other reposted your {{ activityVerb }}": "",
-	"{{ actorName }} and {{ countOtherActors }} others commented on your {{ activityVerb }}": "",
-	"{{ actorName }} and {{ countOtherActors }} others followed you": "",
-	"{{ actorName }} and {{ countOtherActors }} others liked your {{ activityVerb }}": "",
-	"{{ actorName }} and {{ countOtherActors }} others reposted your {{ activityVerb }}": "",
-	"{{ actorName }} commented on your {{ activityVerb }}": "",
-	"{{ actorName }} followed you": "",
-	"{{ actorName }} liked your {{ activityVerb }}": "",
-	"{{ actorName }} reposted your {{ activityVerb }}": "",
-	"{{ countComments }} comments": "",
-	"{{ countLikes }} likes": "",
-	"{{ countReposts }} reposts": ""
-};
-
-var Details$3 = "Detaylar";
-var Post$3 = "";
-var trTranslations = {
-	"1 comment": "",
-	"1 like": "",
-	"1 repost": "",
-	Details: Details$3,
-	"Load activities": "",
-	"Load more": "",
-	"New Post": "",
-	"No data to display...": "",
-	"Pick your emoji": "",
-	Post: Post$3,
-	"Start Typing...": "",
-	"Type your post...": "",
-	"You have 1 new notification": "",
-	"You have {{ notificationCount }} new notifications": "",
-	"{{ actorName }} and 1 other commented on your {{ activityVerb }}": "",
-	"{{ actorName }} and 1 other followed you": "",
-	"{{ actorName }} and 1 other liked your {{ activityVerb }}": "",
-	"{{ actorName }} and 1 other reposted your {{ activityVerb }}": "",
-	"{{ actorName }} and {{ countOtherActors }} others commented on your {{ activityVerb }}": "",
-	"{{ actorName }} and {{ countOtherActors }} others followed you": "",
-	"{{ actorName }} and {{ countOtherActors }} others liked your {{ activityVerb }}": "",
-	"{{ actorName }} and {{ countOtherActors }} others reposted your {{ activityVerb }}": "",
-	"{{ actorName }} commented on your {{ activityVerb }}": "",
-	"{{ actorName }} followed you": "",
-	"{{ actorName }} liked your {{ activityVerb }}": "",
-	"{{ actorName }} reposted your {{ activityVerb }}": "",
-	"{{ countComments }} comments": "",
-	"{{ countLikes }} likes": "",
-	"{{ countReposts }} reposts": ""
-};
-
-var Details$4 = "Voir les commentaires";
-var Post$4 = "";
-var frTranslations = {
-	"1 comment": "",
-	"1 like": "",
-	"1 repost": "",
-	Details: Details$4,
-	"Load activities": "",
-	"Load more": "",
-	"New Post": "",
-	"No data to display...": "",
-	"Pick your emoji": "",
-	Post: Post$4,
-	"Start Typing...": "",
-	"Type your post...": "",
-	"You have 1 new notification": "",
-	"You have {{ notificationCount }} new notifications": "",
-	"{{ actorName }} and 1 other commented on your {{ activityVerb }}": "",
-	"{{ actorName }} and 1 other followed you": "",
-	"{{ actorName }} and 1 other liked your {{ activityVerb }}": "",
-	"{{ actorName }} and 1 other reposted your {{ activityVerb }}": "",
-	"{{ actorName }} and {{ countOtherActors }} others commented on your {{ activityVerb }}": "",
-	"{{ actorName }} and {{ countOtherActors }} others followed you": "",
-	"{{ actorName }} and {{ countOtherActors }} others liked your {{ activityVerb }}": "",
-	"{{ actorName }} and {{ countOtherActors }} others reposted your {{ activityVerb }}": "",
-	"{{ actorName }} commented on your {{ activityVerb }}": "",
-	"{{ actorName }} followed you": "",
-	"{{ actorName }} liked your {{ activityVerb }}": "",
-	"{{ actorName }} reposted your {{ activityVerb }}": "",
-	"{{ countComments }} comments": "",
-	"{{ countLikes }} likes": "",
-	"{{ countReposts }} reposts": ""
-};
-
-var Details$5 = "डिटेल्स";
-var Post$5 = "";
-var hiTranslations = {
-	"1 comment": "",
-	"1 like": "",
-	"1 repost": "",
-	Details: Details$5,
-	"Load activities": "",
-	"Load more": "",
-	"New Post": "",
-	"No data to display...": "",
-	"Pick your emoji": "",
-	Post: Post$5,
-	"Start Typing...": "",
-	"Type your post...": "",
-	"You have 1 new notification": "",
-	"You have {{ notificationCount }} new notifications": "",
-	"{{ actorName }} and 1 other commented on your {{ activityVerb }}": "",
-	"{{ actorName }} and 1 other followed you": "",
-	"{{ actorName }} and 1 other liked your {{ activityVerb }}": "",
-	"{{ actorName }} and 1 other reposted your {{ activityVerb }}": "",
-	"{{ actorName }} and {{ countOtherActors }} others commented on your {{ activityVerb }}": "",
-	"{{ actorName }} and {{ countOtherActors }} others followed you": "",
-	"{{ actorName }} and {{ countOtherActors }} others liked your {{ activityVerb }}": "",
-	"{{ actorName }} and {{ countOtherActors }} others reposted your {{ activityVerb }}": "",
-	"{{ actorName }} commented on your {{ activityVerb }}": "",
-	"{{ actorName }} followed you": "",
-	"{{ actorName }} liked your {{ activityVerb }}": "",
-	"{{ actorName }} reposted your {{ activityVerb }}": "",
-	"{{ countComments }} comments": "",
-	"{{ countLikes }} likes": "",
-	"{{ countReposts }} reposts": ""
-};
-
-var Details$6 = "Dettagli";
-var Post$6 = "";
-var itTranslations = {
-	"1 comment": "",
-	"1 like": "",
-	"1 repost": "",
-	Details: Details$6,
-	"Load activities": "",
-	"Load more": "",
-	"New Post": "",
-	"No data to display...": "",
-	"Pick your emoji": "",
-	Post: Post$6,
-	"Start Typing...": "",
-	"Type your post...": "",
-	"You have 1 new notification": "",
-	"You have {{ notificationCount }} new notifications": "",
-	"{{ actorName }} and 1 other commented on your {{ activityVerb }}": "",
-	"{{ actorName }} and 1 other followed you": "",
-	"{{ actorName }} and 1 other liked your {{ activityVerb }}": "",
-	"{{ actorName }} and 1 other reposted your {{ activityVerb }}": "",
-	"{{ actorName }} and {{ countOtherActors }} others commented on your {{ activityVerb }}": "",
-	"{{ actorName }} and {{ countOtherActors }} others followed you": "",
-	"{{ actorName }} and {{ countOtherActors }} others liked your {{ activityVerb }}": "",
-	"{{ actorName }} and {{ countOtherActors }} others reposted your {{ activityVerb }}": "",
-	"{{ actorName }} commented on your {{ activityVerb }}": "",
-	"{{ actorName }} followed you": "",
-	"{{ actorName }} liked your {{ activityVerb }}": "",
-	"{{ actorName }} reposted your {{ activityVerb }}": "",
-	"{{ countComments }} comments": "",
-	"{{ countLikes }} likes": "",
-	"{{ countReposts }} reposts": ""
-};
-
-var defaultNS = 'translation';
-var defaultLng = 'en';
-Dayjs.extend(updateLocale);
-Dayjs.updateLocale('nl', {
-  calendar: {
-    sameDay: '[vandaag om] LT',
-    nextDay: '[morgen om] LT',
-    nextWeek: 'dddd [om] LT',
-    lastDay: '[gisteren om] LT',
-    lastWeek: '[afgelopen] dddd [om] LT',
-    sameElse: 'L'
-  }
-});
-Dayjs.updateLocale('it', {
-  calendar: {
-    sameDay: '[Oggi alle] LT',
-    nextDay: '[Domani alle] LT',
-    nextWeek: 'dddd [alle] LT',
-    lastDay: '[Ieri alle] LT',
-    lastWeek: '[lo scorso] dddd [alle] LT',
-    sameElse: 'L'
-  }
-});
-Dayjs.updateLocale('hi', {
-  calendar: {
-    sameDay: '[आज] LT',
-    nextDay: '[कल] LT',
-    nextWeek: 'dddd, LT',
-    lastDay: '[कल] LT',
-    lastWeek: '[पिछले] dddd, LT',
-    sameElse: 'L'
-  },
-  // Hindi notation for meridiems are quite fuzzy in practice. While there exists
-  // a rigid notion of a 'Pahar' it is not used as rigidly in modern Hindi.
-  meridiemParse: /रात|सुबह|दोपहर|शाम/,
-  meridiemHour: function meridiemHour(hour, meridiem) {
-    if (hour === 12) {
-      hour = 0;
-    }
-
-    if (meridiem === 'रात') {
-      return hour < 4 ? hour : hour + 12;
-    } else if (meridiem === 'सुबह') {
-      return hour;
-    } else if (meridiem === 'दोपहर') {
-      return hour >= 10 ? hour : hour + 12;
-    } else if (meridiem === 'शाम') {
-      return hour + 12;
-    }
-  },
-  meridiem: function meridiem(hour) {
-    if (hour < 4) {
-      return 'रात';
-    } else if (hour < 10) {
-      return 'सुबह';
-    } else if (hour < 17) {
-      return 'दोपहर';
-    } else if (hour < 20) {
-      return 'शाम';
-    } else {
-      return 'रात';
-    }
-  }
-});
-Dayjs.updateLocale('fr', {
-  calendar: {
-    sameDay: '[Aujourd’hui à] LT',
-    nextDay: '[Demain à] LT',
-    nextWeek: 'dddd [à] LT',
-    lastDay: '[Hier à] LT',
-    lastWeek: 'dddd [dernier à] LT',
-    sameElse: 'L'
-  }
-});
-Dayjs.updateLocale('tr', {
-  calendar: {
-    sameDay: '[bugün saat] LT',
-    nextDay: '[yarın saat] LT',
-    nextWeek: '[gelecek] dddd [saat] LT',
-    lastDay: '[dün] LT',
-    lastWeek: '[geçen] dddd [saat] LT',
-    sameElse: 'L'
-  }
-});
-Dayjs.updateLocale('ru', {
-  calendar: {
-    sameDay: '[Сегодня, в] LT',
-    nextDay: '[Завтра, в] LT',
-    lastDay: '[Вчера, в] LT'
-  }
-});
-var en_locale = {
-  weekdays: 'Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday'.split('_'),
-  months: 'January_February_March_April_May_June_July_August_September_October_November_December'.split('_')
-};
-var defaultStreami18nOptions = {
-  language: 'en',
-  disableDateTimeTranslations: false,
-  debug: false,
-  logger: function logger(msg) {
-    return console.warn(msg);
-  },
-  dayjsLocaleConfigForLanguage: null,
-  translationsForLanguage: null,
-  DateTimeParser: Dayjs
-};
-
-var Streami18n =
-/** @class */
-function () {
-  /**
-   * Contructor accepts following options:
-   *  - language (String) default: 'en'
-   *    Language code e.g., en, tr
-   *
-   *  - translationsForLanguage (object)
-   *    Translations object. Please check src/i18n/en.json for example.
-   *
-   *  - disableDateTimeTranslations (boolean) default: false
-   *    Disable translations for datetimes
-   *
-   *  - debug (boolean) default: false
-   *    Enable debug mode in internal i18n class
-   *
-   *  - logger (function) default: () => {}
-   *    Logger function to log warnings/errors from this class
-   *
-   *  - dayjsLocaleConfigForLanguage (object) default: 'enConfig'
-   *    [Config object](https://momentjs.com/docs/#/i18n/changing-locale/) for internal moment object,
-   *    corresponding to language (param)
-   *
-   *  - DateTimeParser (function) Moment or Dayjs instance/function.
-   *    Make sure to load all the required locales in this Moment or Dayjs instance that you will be provide to Streami18n
-   *
-   * @param {*} options
-   */
-  function Streami18n(options) {
-    var _a, _b, _c, _d, _e, _f, _g, _h, _j;
-
-    var _this = this;
-
-    if (options === void 0) {
-      options = {};
-    }
-
-    this.i18nInstance = i18n.createInstance();
-    this.Dayjs = null;
-
-    this.setLanguageCallback = function () {
-      return null;
-    };
-
-    this.initialized = false;
-    this.isCustomDateTimeParser = false;
-    this.t = null;
-    this.tDateTimeParser = null;
-    this.translations = {
-      en: (_a = {}, _a[defaultNS] = enTranslations, _a),
-      nl: (_b = {}, _b[defaultNS] = nlTranslations, _b),
-      ru: (_c = {}, _c[defaultNS] = ruTranslations, _c),
-      tr: (_d = {}, _d[defaultNS] = trTranslations, _d),
-      fr: (_e = {}, _e[defaultNS] = frTranslations, _e),
-      hi: (_f = {}, _f[defaultNS] = hiTranslations, _f),
-      it: (_g = {}, _g[defaultNS] = itTranslations, _g)
-    };
-    /**
-     * dayjs.updateLocale('nl') also changes the global locale. We don't want to do that
-     * when user calls registerTranslation() function. So intead we will store the locale configs
-     * given to registerTranslation() function in `dayjsLocales` object, and register the required locale
-     * with moment, when setLanguage is called.
-     * */
-
-    this.dayjsLocales = {};
-
-    this.localeExists = function (language) {
-      if (_this.isCustomDateTimeParser) return true;
-      return Object.keys(Dayjs.Ls).indexOf(language) > -1;
-    };
-
-    this.validateCurrentLanguage = function () {
-      var availableLanguages = Object.keys(_this.translations);
-
-      if (availableLanguages.indexOf(_this.currentLanguage) === -1) {
-        _this.logger("Streami18n: '" + _this.currentLanguage + "' language is not registered." + (" Please make sure to call streami18n.registerTranslation('" + _this.currentLanguage + "', {...}) or ") + ("use one the built-in supported languages - " + _this.getAvailableLanguages()));
-
-        _this.currentLanguage = defaultLng;
-      }
-    };
-    /** Returns an instance of i18next used within this class instance */
-
-
-    this.geti18Instance = function () {
-      return _this.i18nInstance;
-    };
-    /** Returns list of available languages. */
-
-
-    this.getAvailableLanguages = function () {
-      return Object.keys(_this.translations);
-    };
-    /** Returns all the translation dictionary for all inbuilt-languages */
-
-
-    this.getTranslations = function () {
-      return _this.translations;
-    };
-
-    var finalOptions = __assign(__assign({}, defaultStreami18nOptions), options); // Prepare the i18next configuration.
-
-
-    this.logger = finalOptions.logger;
-    this.currentLanguage = finalOptions.language;
-    this.DateTimeParser = finalOptions.DateTimeParser;
-
-    try {
-      // This is a shallow check to see if given parser is instance of Dayjs.
-      // For some reason Dayjs.isDayjs(this.DateTimeParser()) doesn't work.
-      if (this.DateTimeParser && this.DateTimeParser.extend) {
-        this.DateTimeParser.extend(LocalizedFormat);
-        this.DateTimeParser.extend(calendar);
-        this.DateTimeParser.extend(localeData);
-        this.DateTimeParser.extend(relativeTime);
-      }
-    } catch (error) {
-      throw Error("Streami18n: Looks like you wanted to provide Dayjs instance, but something went wrong while adding plugins - " + error);
-    }
-
-    this.isCustomDateTimeParser = !!options.DateTimeParser;
-    var translationsForLanguage = finalOptions.translationsForLanguage;
-
-    if (translationsForLanguage) {
-      this.translations[this.currentLanguage] = (_h = {}, _h[defaultNS] = translationsForLanguage, _h);
-    } // If translations don't exist for given language, then set it as empty object.
-
-
-    if (!this.translations[this.currentLanguage]) {
-      this.translations[this.currentLanguage] = (_j = {}, _j[defaultNS] = {}, _j);
-    }
-
-    this.i18nextConfig = {
-      nsSeparator: false,
-      keySeparator: false,
-      fallbackLng: false,
-      debug: finalOptions.debug,
-      lng: this.currentLanguage,
-      interpolation: {
-        escapeValue: false
-      },
-      parseMissingKeyHandler: function parseMissingKeyHandler(key) {
-        _this.logger("Streami18n: Missing translation for key: " + key);
-
-        return key;
-      }
-    };
-    this.validateCurrentLanguage();
-    var dayjsLocaleConfigForLanguage = finalOptions.dayjsLocaleConfigForLanguage;
-
-    if (dayjsLocaleConfigForLanguage) {
-      this.addOrUpdateLocale(this.currentLanguage, __assign({}, dayjsLocaleConfigForLanguage));
-    } else if (!this.localeExists(this.currentLanguage)) {
-      this.logger("Streami18n: Streami18n(...) - Locale config for " + this.currentLanguage + " does not exist in momentjs." + ("Please import the locale file using \"import 'moment/locale/" + this.currentLanguage + "';\" in your app or ") + "register the locale config with Streami18n using registerTranslation(language, translation, customDayjsLocale)");
-    }
-
-    this.tDateTimeParser = function (timestamp) {
-      if (finalOptions.disableDateTimeTranslations || !_this.localeExists(_this.currentLanguage)) {
-        return _this.DateTimeParser(timestamp).locale(defaultLng);
-      }
-
-      return _this.DateTimeParser(timestamp).locale(_this.currentLanguage);
-    };
-  }
-  /**
-   * Initializes the i18next instance with configuration (which enables natural language as default keys)
-   */
-
-
-  Streami18n.prototype.init = function () {
-    return __awaiter(this, void 0, void 0, function () {
-      var _a, e_1;
-
-      return __generator(this, function (_b) {
-        switch (_b.label) {
-          case 0:
-            this.validateCurrentLanguage();
-            _b.label = 1;
-
-          case 1:
-            _b.trys.push([1, 3,, 4]);
-
-            _a = this;
-            return [4
-            /*yield*/
-            , this.i18nInstance.init(__assign(__assign({}, this.i18nextConfig), {
-              resources: this.translations,
-              lng: this.currentLanguage
-            }))];
-
-          case 2:
-            _a.t = _b.sent();
-            this.initialized = true;
-            return [2
-            /*return*/
-            , {
-              t: this.t,
-              tDateTimeParser: this.tDateTimeParser
-            }];
-
-          case 3:
-            e_1 = _b.sent();
-            this.logger("Something went wrong with init: " + e_1);
-            return [3
-            /*break*/
-            , 4];
-
-          case 4:
-            return [2
-            /*return*/
-            ];
-        }
-      });
-    });
-  };
-  /**
-   * Returns current version translator function.
-   */
-
-
-  Streami18n.prototype.getTranslators = function () {
-    return __awaiter(this, void 0, void 0, function () {
-      return __generator(this, function (_a) {
-        switch (_a.label) {
-          case 0:
-            if (!!this.initialized) return [3
-            /*break*/
-            , 2];
-
-            if (this.dayjsLocales[this.currentLanguage]) {
-              this.addOrUpdateLocale(this.currentLanguage, this.dayjsLocales[this.currentLanguage]);
-            }
-
-            return [4
-            /*yield*/
-            , this.init()];
-
-          case 1:
-            return [2
-            /*return*/
-            , _a.sent()];
-
-          case 2:
-            return [2
-            /*return*/
-            , {
-              t: this.t,
-              tDateTimeParser: this.tDateTimeParser
-            }];
-        }
-      });
-    });
-  };
-  /**
-   * Register translation
-   *
-   * @param {*} language
-   * @param {*} translation
-   * @param {*} customDayjsLocale
-   */
-
-
-  Streami18n.prototype.registerTranslation = function (language, translation, customDayjsLocale) {
-    var _a;
-
-    if (!translation) {
-      this.logger("Streami18n: registerTranslation(language, translation, customDayjsLocale) called without translation");
-      return;
-    }
-
-    if (!this.translations[language]) {
-      this.translations[language] = (_a = {}, _a[defaultNS] = translation, _a);
-    } else {
-      this.translations[language][defaultNS] = translation;
-    }
-
-    if (customDayjsLocale) {
-      this.dayjsLocales[language] = __assign({}, customDayjsLocale);
-    } else if (!this.localeExists(language)) {
-      this.logger("Streami18n: registerTranslation(language, translation, customDayjsLocale) - " + ("Locale config for " + language + " does not exist in Dayjs.") + ("Please import the locale file using \"import 'dayjs/locale/" + language + "';\" in your app or ") + "register the locale config with Streami18n using registerTranslation(language, translation, customDayjsLocale)");
-    }
-
-    if (this.initialized) {
-      this.i18nInstance.addResources(language, defaultNS, translation);
-    }
-  };
-
-  Streami18n.prototype.addOrUpdateLocale = function (key, config) {
-    if (this.localeExists(key)) {
-      Dayjs.updateLocale(key, __assign({}, config));
-    } else {
-      // Merging the custom locale config with en config, so missing keys can default to english.
-      Dayjs.locale(__assign({
-        name: key
-      }, __assign(__assign({}, en_locale), config)), null, true);
-    }
-  };
-  /**
-   * Changes the language.
-   * @param {*} language
-   */
-
-
-  Streami18n.prototype.setLanguage = function (language) {
-    return __awaiter(this, void 0, void 0, function () {
-      var t, e_2;
-      return __generator(this, function (_a) {
-        switch (_a.label) {
-          case 0:
-            this.currentLanguage = language;
-            if (!this.initialized) return [2
-            /*return*/
-            ];
-            _a.label = 1;
-
-          case 1:
-            _a.trys.push([1, 3,, 4]);
-
-            return [4
-            /*yield*/
-            , this.i18nInstance.changeLanguage(language)];
-
-          case 2:
-            t = _a.sent();
-
-            if (this.dayjsLocales[language]) {
-              this.addOrUpdateLocale(this.currentLanguage, this.dayjsLocales[this.currentLanguage]);
-            }
-
-            this.setLanguageCallback(t);
-            return [2
-            /*return*/
-            , t];
-
-          case 3:
-            e_2 = _a.sent();
-            this.logger("Failed to set language: " + e_2);
-            return [3
-            /*break*/
-            , 4];
-
-          case 4:
-            return [2
-            /*return*/
-            ];
-        }
-      });
-    });
-  };
-  /**
-   *
-   * @param {*} callback
-   */
-
-
-  Streami18n.prototype.registerSetLanguageCallback = function (callback) {
-    this.setLanguageCallback = callback;
-  };
-
-  return Streami18n;
-}();
-
 var StreamContext = /*#__PURE__*/createContext({
   changedUserData: function changedUserData() {},
   sharedFeedManagers: {},
@@ -3544,8 +3544,8 @@ function (_super) {
     var newState = __assign(__assign({}, state), {
       client: client,
       user: client.currentUser,
-      userData: client.currentUser,
-      // TODO type issue: client.currentUser.data - doesn't exist?
+      userData: undefined,
+      // TODO type issue: was client.currentUser.data - seems wrong?
       analyticsClient: analyticsClient,
       sharedFeedManagers: {},
       errorHandler: props.errorHandler,
