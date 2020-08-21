@@ -6,7 +6,7 @@ node_modules
 
 # builds
 /example/build
-dist
+# dist # commenting out on ts-dist branch #
 lib
 
 # misc
