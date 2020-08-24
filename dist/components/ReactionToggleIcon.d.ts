@@ -12,7 +12,7 @@ declare type Props = {
     /** The width of the icon */
     width?: number;
     /** The map with own reactions */
-    own_reactions: ReactionKindMap<{}, {}> | null | undefined;
+    own_reactions: ReactionKindMap<any, any> | null | undefined;
     /** The reaction counts for the activity */
     counts?: ReactionCounts;
     /** Function to call when pressed, usually this should call

@@ -66,7 +66,7 @@ export declare type ActivityArgData<UserData, CustomActivityData> = {
     time?: string;
     actor: StreamUser<UserData>;
     verb: string;
-    object: string | StreamUser<UserData> | CollectionEntry<{}>;
+    object: string | StreamUser<UserData> | CollectionEntry<any>;
     target?: string;
 } & CustomActivityData;
 export declare type MarkValue = boolean | string;
@@ -111,7 +111,7 @@ export declare type StreamFeed<UserData, CustomActivityData> = {
     getActivityDetail(activityId: string, options?: FeedRequestOptions): Promise<FeedResponse<UserData, CustomActivityData>>;
 };
 export declare type Subscription = {
-    then: (success: () => any, failure: (err: Error) => any) => Promise<{}>;
+    then: (success: () => any, failure: (err: Error) => any) => Promise<any>;
     cancel: () => any;
 };
 export declare type ReactionKindMap<UserData, ReactionData> = {
@@ -134,13 +134,13 @@ export declare type ActivityResponse<UserData, CustomActivityData> = {
         error: string;
     };
     verb: string;
-    object: string | object;
+    object: string | any;
     target: string;
     origin: null | string;
     to: Array<string>;
     reaction_counts?: ReactionCounts;
-    own_reactions?: ReactionKindMap<UserData, object>;
-    latest_reactions?: ReactionKindMap<UserData, object>;
+    own_reactions?: ReactionKindMap<UserData, any>;
+    latest_reactions?: ReactionKindMap<UserData, any>;
     latest_reactions_extra?: ReactionExtraKindMap;
     activities?: any;
 } & CustomActivityData;
@@ -166,8 +166,8 @@ export declare type ReactionResponse<UserData, ReactionData> = {
     user_id: string;
     user: UserResponse<UserData>;
     children_counts?: ReactionCounts;
-    own_children?: ReactionKindMap<UserData, object>;
-    latest_children?: ReactionKindMap<UserData, object>;
+    own_children?: ReactionKindMap<UserData, any>;
+    latest_children?: ReactionKindMap<UserData, any>;
     latest_children_extra?: ReactionExtraKindMap;
 } & TimestampedResponse;
 export {};

@@ -20,8 +20,8 @@ export declare type FeedCtx = {
     hasReverseNextPage: boolean;
     refreshing: boolean;
     hasDoneRequest: boolean;
-    realtimeAdds: Array<{}>;
-    realtimeDeletes: Array<{}>;
+    realtimeAdds: Array<any>;
+    realtimeDeletes: Array<any>;
     feedManager: FeedManager;
     onToggleReaction: ToggleReactionCallbackFunction;
     onAddReaction: AddReactionCallbackFunction;
@@ -44,16 +44,16 @@ export declare type FeedProps = {
     /** If true, feed shows the Notifier component when new activities are added */
     notify?: boolean;
     /** The feed read handler (change only for advanced/complex use-cases) */
-    doFeedRequest?: (client: BaseClient, feedGroup: string, userId?: string, options?: FeedRequestOptions) => Promise<FeedResponse<{}, {}>>;
+    doFeedRequest?: (client: BaseClient, feedGroup: string, userId?: string, options?: FeedRequestOptions) => Promise<FeedResponse<any, any>>;
     /** Override activity delete request */
     doActivityDeleteRequest?: (id: string) => any;
     children?: React.ReactNode;
     /** Override reaction add request */
-    doReactionAddRequest?: (kind: string, activity: BaseActivityResponse, data?: {}, options?: {}) => any;
+    doReactionAddRequest?: (kind: string, activity: BaseActivityResponse, data?: any, options?: any) => any;
     /** Override reaction delete request */
     doReactionDeleteRequest?: (id: string) => any;
     /** Override child reaction add request */
-    doChildReactionAddRequest?: (kind: string, activity: BaseReaction, data?: {}, options?: {}) => any;
+    doChildReactionAddRequest?: (kind: string, activity: BaseReaction, data?: any, options?: any) => any;
     /** Override child reaction delete request */
     doChildReactionDeleteRequest?: (id: string) => any;
     /** Override reactions filter request */

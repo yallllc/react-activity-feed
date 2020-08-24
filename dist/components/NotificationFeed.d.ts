@@ -21,15 +21,15 @@ declare type Props = {
     /** Component to show when there are no activities in the feed **/
     Placeholder: Renderable;
     /** The feed read handler (change only for advanced/complex use-cases) */
-    doFeedRequest?: (client: BaseClient, feedGroup: string, userId?: string, options?: FeedRequestOptions) => Promise<FeedResponse<{}, {}>>;
+    doFeedRequest?: (client: BaseClient, feedGroup: string, userId?: string, options?: FeedRequestOptions) => Promise<FeedResponse<any, any>>;
     /** Override activity delete request */
     doActivityDeleteRequest?: (id: string) => unknown;
     /** Override reaction add request */
-    doReactionAddRequest?: (kind: string, activity: BaseActivityResponse, data?: {}, options?: {}) => unknown;
+    doReactionAddRequest?: (kind: string, activity: BaseActivityResponse, data?: any, options?: any) => unknown;
     /** Override reaction delete request */
     doReactionDeleteRequest?: (id: string) => unknown;
     /** Override child reaction add request */
-    doChildReactionAddRequest?: (kind: string, activity: BaseReaction, data?: {}, options?: {}) => unknown;
+    doChildReactionAddRequest?: (kind: string, activity: BaseReaction, data?: any, options?: any) => unknown;
     /** Override child reaction delete request */
     doChildReactionDeleteRequest?: (id: string) => unknown;
     /** The location that should be used for analytics when liking in the feed,
@@ -44,18 +44,18 @@ declare type Props = {
 export default class NotificationFeed extends React.Component<Props> {
     static defaultProps: {
         feedGroup: string;
-        Group: React.FC<Pick<{
+        Group: React.FC<{
             activityGroup: any;
-            onClickNotification?: (activityGroup: import("../getstreamCustomTypes").ActivityGroupResponse<{}, {}>) => unknown;
+            onClickNotification?: (activityGroup: import("../getstreamCustomTypes").ActivityGroupResponse<any, any>) => unknown;
             onClickUser?: (input: import("../getstreamCustomTypes").UserResponse<import("../types").UserData>) => unknown;
-            onMarkAsRead?: (group: true | import("../getstreamCustomTypes").ActivityGroupResponse<{}, {}> | readonly import("../getstreamCustomTypes").ActivityGroupResponse<{}, {}>[]) => Promise<unknown>;
-        } & import("../Context").Streami18Ctx, "activityGroup" | "onClickNotification" | "onClickUser" | "onMarkAsRead">>;
+            onMarkAsRead?: (group: true | import("../getstreamCustomTypes").ActivityGroupResponse<any, any> | readonly import("../getstreamCustomTypes").ActivityGroupResponse<any, any>[]) => Promise<unknown>;
+        }>;
         notify: boolean;
-        Notifier: React.FC<Pick<import("./NewActivitiesNotification").Props, "adds" | "deletes" | "labelSingle" | "labelPlural" | "labelFunction" | "onClick">>;
+        Notifier: React.FC<import("./NewActivitiesNotification").Props>;
         Paginator: typeof LoadMorePaginator;
-        Placeholder: React.FC<Pick<{
+        Placeholder: React.FC<{
             text: string;
-        } & import("../Context").Streami18Ctx, "text">>;
+        }>;
     };
     render(): JSX.Element;
 }

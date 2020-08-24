@@ -1,8 +1,8 @@
 import { FeedRequestOptions, FeedResponse, ReactionFilterResponse, ReactionRequestOptions } from '../getstreamCustomTypes';
 import { BaseActivityGroupResponse, BaseActivityResponse, BaseReaction } from '../types';
 import { FeedInnerProps } from './Feed';
-declare type FR = FeedResponse<{}, {}>;
-declare type RR = ReactionFilterResponse<{}, {}>;
+declare type FR = FeedResponse<any, any>;
+declare type RR = ReactionFilterResponse<any, any>;
 declare type FeedManagerState = {
     activityOrder: string[];
     activities: any;
@@ -11,8 +11,8 @@ declare type FeedManagerState = {
     lastReverseResponse?: {
         next: string;
     };
-    realtimeAdds: Array<{}>;
-    realtimeDeletes: Array<{}>;
+    realtimeAdds: Array<any>;
+    realtimeDeletes: Array<any>;
     subscription?: any;
     activityIdToPath: {
         [key: string]: string[];
@@ -88,10 +88,10 @@ export declare class FeedManager {
     removeFoundActivityIdPaths: (data: any, previous: {}, basePath: any[]) => {};
     removeFoundActivityIdPath: (data: any[], previous: {}, basePath: any[]) => {};
     addFoundReactionIdPaths: (data: any, previous: {}, basePath: any[]) => {};
-    addFoundActivityIdPaths: (data: any, previous: {}, basePath: any[]) => {};
+    addFoundActivityIdPaths: (data: any, previous: any, basePath: any[]) => any;
     addFoundActivityIdPath: (data: Array<{
         id: string;
-    }>, previous: {}, basePath: any[]) => {};
+    }>, previous: any, basePath: any[]) => any;
     responseToReactionActivities: (response: FR) => {};
     unseenUnreadFromResponse(response: FR): {
         unseen: number;

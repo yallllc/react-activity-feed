@@ -17,20 +17,20 @@ export declare type ImageUpload = UploadInfo & {
     file: Blob | File;
     previewUri?: string;
 };
-export declare type ErrorHandler = (error: Error, type: FlowRequestTypes, details: {}) => any;
+export declare type ErrorHandler = (error: Error, type: FlowRequestTypes, details: any) => any;
 declare type ReactComponentClass = Component<any>;
 export declare type ReactComponentFunction = (props: any) => ReactElement | boolean | number | string | undefined;
 export declare type ReactElementCreator = ReactComponentClass | ReactComponentFunction;
 export declare type RenderableButNotElement = (ReactElementCreator | boolean | number | string) | undefined;
 export declare type Renderable = RenderableButNotElement | ReactElement<any> | React.ElementType<any>;
-export declare type BaseActivityResponse = ActivityResponse<{}, {}>;
-export declare type BaseActivityGroupResponse = ActivityGroupResponse<{}, {}>;
+export declare type BaseActivityResponse = ActivityResponse<any, any>;
+export declare type BaseActivityGroupResponse = ActivityGroupResponse<any, any>;
 export declare type BaseAppCtx = AppCtx;
 export declare type BaseFeedCtx = FeedCtx;
 export declare type BaseClient = StreamClient;
-export declare type BaseReaction = ReactionResponse<{}, {}>;
-export declare type BaseReactionMap = ReactionKindMap<object, object>;
-export declare type BaseUserResponse = StreamUserResponse<{}>;
+export declare type BaseReaction = ReactionResponse<any, any>;
+export declare type BaseReactionMap = ReactionKindMap<any, any>;
+export declare type BaseUserResponse = StreamUserResponse<any>;
 export declare type UserData = {
     name?: string;
     profileImage?: string;
@@ -52,7 +52,7 @@ export declare type CustomActivityData = {
     image?: string;
     attachments?: Attachments;
 };
-export declare type CustomActivityArgData = ActivityArgData<{}, CustomActivityData>;
+export declare type CustomActivityArgData = ActivityArgData<any, CustomActivityData>;
 export declare type ActivityData = ActivityResponse<UserData, CustomActivityData>;
 export declare type UserResponse = StreamUserResponse<UserData>;
 export declare type ToggleReactionCallbackFunction = (kind: string, activity: BaseActivityResponse, data?: {}, options?: {
@@ -90,12 +90,12 @@ export declare type Emoji = {
 };
 export declare type Trigger = {
     [triggerChar: string]: {
-        output?: (item: object | string, trigger?: string) => {
+        output?: (item: any | string, trigger?: string) => {
             key?: string;
             text: string;
             caretPosition: 'start' | 'end' | 'next' | number;
         } | string | null;
-        dataProvider: (token: string) => Promise<Array<object | string>> | Array<object | string>;
+        dataProvider: (token: string) => Promise<Array<any | string>> | Array<any | string>;
         allowWhitespace?: boolean;
         afterWhitespace?: boolean;
         component: ReactElement<any>;

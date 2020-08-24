@@ -28,7 +28,7 @@ export declare type AppCtx<Data = UserData> = {
     errorHandler: ErrorHandler;
 };
 export declare type Streami18Ctx = {
-    t: (msg: string, data?: object) => string;
+    t: (msg: string, data?: any) => string;
     tDateTimeParser: (input?: string | number) => Dayjs.Dayjs;
 };
 declare type StreamAppProps<Data = UserData> = {
@@ -39,7 +39,7 @@ declare type StreamAppProps<Data = UserData> = {
     /** The access token for the end user that uses your website, how to generate it can be found [here](https://getstream.io/docs/#frontend_setup) */
     token: string;
     /** Any options that [`stream.connect()`](https://getstream.io/docs/#setup) accepts */
-    options?: {};
+    options?: any;
     analyticsToken?: string;
     /** Normaly feed state is local to the feed component, such as FlatFeed and
      * NotificationFeed. This means that changes in one feed don't affect the

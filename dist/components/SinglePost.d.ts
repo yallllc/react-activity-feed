@@ -11,11 +11,11 @@ declare type Props = {
     /** Override activity delete request */
     doActivityDeleteRequest?: (id: string) => unknown;
     /** Override reaction add request */
-    doReactionAddRequest?: (kind: string, activity: BaseActivityResponse, data?: {}, options?: {}) => unknown;
+    doReactionAddRequest?: (kind: string, activity: BaseActivityResponse, data?: any, options?: any) => unknown;
     /** Override reaction delete request */
     doReactionDeleteRequest?: (id: string) => unknown;
     /** Override child reaction add request */
-    doChildReactionAddRequest?: (kind: string, activity: BaseReaction, data?: {}, options?: {}) => unknown;
+    doChildReactionAddRequest?: (kind: string, activity: BaseReaction, data?: any, options?: any) => unknown;
     /** Override child reaction delete request */
     doChildReactionDeleteRequest?: (id: string) => unknown;
     /** Override reactions filter request */

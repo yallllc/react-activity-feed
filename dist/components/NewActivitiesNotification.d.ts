@@ -1,8 +1,8 @@
 import React from 'react';
 import { Streami18Ctx } from '../Context';
 export declare type Props = Streami18Ctx & {
-    adds: Array<{}>;
-    deletes: Array<{}>;
+    adds: Array<any>;
+    deletes: Array<any>;
     labelSingle?: string;
     labelPlural?: string;
     /** A function that returns either the string to display or null in case no

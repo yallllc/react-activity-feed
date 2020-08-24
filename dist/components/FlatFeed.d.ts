@@ -22,19 +22,19 @@ declare type Props = {
     /** If true, feed shows the Notifier component when new activities are added */
     notify?: boolean;
     /** The feed read handler (change only for advanced/complex use-cases) */
-    doFeedRequest?: (client: BaseClient, feedGroup: string, userId?: string, options?: FeedRequestOptions) => Promise<FeedResponse<{}, {}>>;
+    doFeedRequest?: (client: BaseClient, feedGroup: string, userId?: string, options?: FeedRequestOptions) => Promise<FeedResponse<any, any>>;
     /** Override activity delete request */
     doActivityDeleteRequest?: (id: string) => unknown;
     /** Override reaction add request */
-    doReactionAddRequest?: (kind: string, activity: BaseActivityResponse, data?: {}, options?: {}) => unknown;
+    doReactionAddRequest?: (kind: string, activity: BaseActivityResponse, data?: any, options?: any) => unknown;
     /** Override reaction delete request */
     doReactionDeleteRequest?: (id: string) => unknown;
     /** Override child reaction add request */
-    doChildReactionAddRequest?: (kind: string, activity: BaseReaction, data?: {}, options?: {}) => unknown;
+    doChildReactionAddRequest?: (kind: string, activity: BaseReaction, data?: any, options?: any) => unknown;
     /** Override child reaction delete request */
     doChildReactionDeleteRequest?: (id: string) => unknown;
     /** Override reactions filter request */
-    doReactionsFilterRequest?: (options: {}) => Promise<any>;
+    doReactionsFilterRequest?: (options: any) => Promise<any>;
     /** The location that should be used for analytics when liking in the feed,
      * this is only useful when you have analytics enabled for your app. */
     analyticsLocation?: string;
