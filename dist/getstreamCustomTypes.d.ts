@@ -107,8 +107,15 @@ export declare type StreamFeed<UserData, CustomActivityData> = {
     id: string;
     slug: string;
     userId: string;
-    get(options?: FeedRequestOptions): Promise<FeedResponse<UserData, CustomActivityData>>;
-    getActivityDetail(activityId: string, options?: FeedRequestOptions): Promise<FeedResponse<UserData, CustomActivityData>>;
+    get: (options?: FeedRequestOptions) => Promise<FeedResponse<UserData, CustomActivityData>>;
+    getActivityDetail: (activityId: string, options?: FeedRequestOptions) => Promise<FeedResponse<UserData, CustomActivityData>>;
+    addActivity: (activities: ActivityArgData<UserData, CustomActivityData>) => Promise<ActivityResponse<UserData, CustomActivityData>>;
+    addActivities: (activities: Array<ActivityArgData<UserData, CustomActivityData>>) => Promise<Array<ActivityResponse<UserData, CustomActivityData>>>;
+    subscribe: () => Subscription;
+    removeActivity: (id: string | {
+        foreignId: string;
+    }) => Promise<any>;
+    follow: (targetFeedGroup: string, targetUserId: string | StreamUser<UserData>, options?: FollowRequestOptions) => Promise<DurationResponse>;
 };
 export declare type Subscription = {
     then: (success: () => any, failure: (err: Error) => any) => Promise<any>;

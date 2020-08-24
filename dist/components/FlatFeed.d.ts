@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FeedRequestOptions, FeedResponse } from '../getstreamCustomTypes';
+import { FeedRequestOptions } from '../getstreamCustomTypes';
 import { BaseActivityResponse, BaseClient, BaseReaction, Renderable } from '../types';
 declare type Props = {
     /** The feed group part of the feed that should be displayed */
@@ -22,7 +22,7 @@ declare type Props = {
     /** If true, feed shows the Notifier component when new activities are added */
     notify?: boolean;
     /** The feed read handler (change only for advanced/complex use-cases) */
-    doFeedRequest?: (client: BaseClient, feedGroup: string, userId?: string, options?: FeedRequestOptions) => Promise<FeedResponse<any, any>>;
+    doFeedRequest?: (client: BaseClient, feedGroup: string, userId?: string, options?: FeedRequestOptions) => Promise<any>;
     /** Override activity delete request */
     doActivityDeleteRequest?: (id: string) => unknown;
     /** Override reaction add request */
