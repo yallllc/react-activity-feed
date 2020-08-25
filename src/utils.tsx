@@ -36,11 +36,11 @@ export const smartRender = (
     ElementOrComponentOrLiteral = fallback;
   }
   if (React.isValidElement(ElementOrComponentOrLiteral)) {
-    // Flow cast through any, to make flow believe it's a React.Element
+    // cast through any, to make TS believe it's a React.Element
     return (ElementOrComponentOrLiteral as any) as React.ReactElement<any>;
   }
 
-  // Flow cast through any to remove React.Element after previous check
+  // cast through any to remove React.Element after previous check
   const ComponentOrLiteral = (ElementOrComponentOrLiteral as any) as RenderableButNotElement;
   if (
     typeof ComponentOrLiteral === 'string' ||
@@ -77,7 +77,6 @@ export function userOrDefault(
   ) {
     actor = notFound;
   } else {
-    //$FlowBug
     actor = user as any;
   }
   return actor;

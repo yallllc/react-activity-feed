@@ -109,14 +109,14 @@ export type UserResponse = StreamUserResponse<UserData>;
 export type ToggleReactionCallbackFunction = (
   kind: string,
   activity: BaseActivityResponse,
-  data?: {},
+  data?: any,
   options?: { trackAnalytics?: boolean } & ReactionRequestOptions,
 ) => void | Promise<any>;
 
 export type AddReactionCallbackFunction = (
   kind: string,
   activity: BaseActivityResponse,
-  data?: {},
+  data?: any,
   options?: { trackAnalytics?: boolean } & ReactionRequestOptions,
 ) => void | Promise<any>;
 
@@ -130,14 +130,14 @@ export type RemoveReactionCallbackFunction = (
 export type ToggleChildReactionCallbackFunction = (
   kind: string,
   activity: BaseReaction,
-  data: {},
+  data: any,
   options?: { trackAnalytics?: boolean } & ReactionRequestOptions,
 ) => void | Promise<any>;
 
 export type AddChildReactionCallbackFunction = (
   kind: string,
   activity: BaseReaction,
-  data: {},
+  data: any,
   options?: { trackAnalytics?: boolean } & ReactionRequestOptions,
 ) => void | Promise<any>;
 
@@ -154,8 +154,8 @@ export type CommentData = {
 
 export type Comment = ReactionResponse<UserData, CommentData>;
 
-export type NotificationActivity = ActivityResponse<UserData, {}>;
-export type NotificationActivities = Array<ActivityResponse<UserData, {}>>;
+export type NotificationActivity = ActivityResponse<UserData, any>;
+export type NotificationActivities = Array<ActivityResponse<UserData, any>>;
 
 export type Emoji = {
   // The actual unicode emoji (e.g. 👍)
