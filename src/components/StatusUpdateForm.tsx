@@ -365,7 +365,10 @@ class StatusUpdateFormInner extends React.Component<PropsInner, State> {
     }
 
     const modifiedActivity = this.props.modifyActivityDataAsync
-      ? await this.props.modifyActivityDataAsync(activity, this.props.token) // y'all
+      ? await this.props.modifyActivityDataAsync(
+          activity,
+          (this.props as any).token,
+        ) // y'all
       : this.props.modifyActivityData(activity);
 
     if (this.props.doRequest) {

@@ -5,11 +5,12 @@
   "author": "GetStream",
   "license": "BSD-3-Clause",
   "repository": "GetStream/react-activity-feed",
-  "main": "dist/index.js",
-  "module": "dist/index.es.js",
-  "jsnext:main": "dist/index.es.js",
-  "jsdelivr": "dist/browser.full-bundle.js",
-  "types": "dist/index.d.ts",
+  "main": "src/index.ts",
+  "files": [
+    "src"
+  ],
+  "module": "src/index.ts",
+  "types": "src/index.ts",
   "keywords": [
     "feed",
     "newsfeed",
@@ -130,9 +131,6 @@
     "typescript": "^4.0.2",
     "webpack": "^4.12.2"
   },
-  "files": [
-    "dist"
-  ],
   "dependencies": {
     "@babel/runtime": "^7.1.2",
     "@fortawesome/fontawesome-svg-core": "^1.2.4",
