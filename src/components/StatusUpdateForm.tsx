@@ -75,6 +75,7 @@ type Props = {
   // y'all
   modifyActivityDataAsync?: (
     activityData: any,
+    token: string,
   ) => Promise<ActivityArgData<any, any>>;
 
   /** Add extra footer item */
@@ -364,7 +365,7 @@ class StatusUpdateFormInner extends React.Component<PropsInner, State> {
     }
 
     const modifiedActivity = this.props.modifyActivityDataAsync
-      ? await this.props.modifyActivityDataAsync(activity) // y'all
+      ? await this.props.modifyActivityDataAsync(activity, this.props.token) // y'all
       : this.props.modifyActivityData(activity);
 
     if (this.props.doRequest) {
