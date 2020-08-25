@@ -72,6 +72,11 @@ type Props = {
    * */
   modifyActivityData?: (activityData: any) => ActivityArgData<any, any>;
 
+  // y'all
+  modifyActivityDataAsync?: (
+    activityData: any,
+  ) => Promise<ActivityArgData<any, any>>;
+
   /** Add extra footer item */
   FooterItem?: React.ReactNode;
 
@@ -358,7 +363,10 @@ class StatusUpdateFormInner extends React.Component<PropsInner, State> {
       activity.attachments = attachments;
     }
 
-    const modifiedActivity = this.props.modifyActivityData(activity);
+    const modifiedActivity = this.props.modifyActivityDataAsync
+      ? await this.props.modifyActivityDataAsync(activity) // y'all
+      : this.props.modifyActivityData(activity);
+
     if (this.props.doRequest) {
       return await this.props.doRequest(modifiedActivity);
     } else {

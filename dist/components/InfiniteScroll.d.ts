@@ -1,0 +1,68 @@
+import PropTypes from 'prop-types';
+import React, { Component, ReactNode, RefObject } from 'react';
+declare type Props = {
+    children: ReactNode;
+    element: ReactNode;
+    hasMore: boolean;
+    initialLoad: boolean;
+    isReverse: boolean;
+    loader: ReactNode;
+    loadMore: (input: number) => void;
+    getScrollParent: () => RefObject<HTMLElement>;
+    pageStart: number;
+    ref: (node: HTMLElement) => void;
+    threshold: number;
+    useCapture: boolean;
+    useWindow: boolean;
+    isLoading: boolean;
+};
+export default class InfiniteScroll extends Component<Props> {
+    static propTypes: {
+        children: PropTypes.Validator<PropTypes.ReactNodeLike>;
+        element: PropTypes.Requireable<PropTypes.ReactNodeLike>;
+        hasMore: PropTypes.Requireable<boolean>;
+        initialLoad: PropTypes.Requireable<boolean>;
+        isReverse: PropTypes.Requireable<boolean>;
+        loader: PropTypes.Requireable<PropTypes.ReactNodeLike>;
+        loadMore: PropTypes.Validator<(...args: any[]) => any>;
+        getScrollParent: PropTypes.Requireable<(...args: any[]) => any>;
+        pageStart: PropTypes.Requireable<number>;
+        ref: PropTypes.Requireable<(...args: any[]) => any>;
+        threshold: PropTypes.Requireable<number>;
+        useCapture: PropTypes.Requireable<boolean>;
+        useWindow: PropTypes.Requireable<boolean>;
+        isLoading: PropTypes.Requireable<boolean>;
+    };
+    static defaultProps: {
+        element: string;
+        hasMore: boolean;
+        initialLoad: boolean;
+        pageStart: number;
+        ref: any;
+        threshold: number;
+        useWindow: boolean;
+        isReverse: boolean;
+        useCapture: boolean;
+        loader: any;
+        isLoading: boolean;
+    };
+    pageLoaded: number;
+    defaultLoader: HTMLElement;
+    scrollComponent: HTMLElement;
+    constructor(props: any);
+    componentDidMount(): void;
+    componentDidUpdate(): void;
+    componentWillUnmount(): void;
+    setDefaultLoader(loader: any): void;
+    detachMousewheelListener(): void;
+    detachScrollListener(): void;
+    getParentElement(el: any): any;
+    filterProps(props: any): any;
+    attachScrollListener(): void;
+    mousewheelListener(e: any): void;
+    scrollListener(): void;
+    calculateOffset(el: any, scrollTop: any): any;
+    calculateTopPosition(el: any): any;
+    render(): React.CElement<any, React.Component<any, any, any>>;
+}
+export {};
