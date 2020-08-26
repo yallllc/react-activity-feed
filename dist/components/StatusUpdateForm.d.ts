@@ -22,7 +22,7 @@ declare type Props = {
      * ```
      * */
     modifyActivityData?: (activityData: any) => ActivityArgData<any, any>;
-    modifyActivityDataAsync?: (activityData: any) => Promise<ActivityArgData<any, any>>;
+    modifyActivityDataAsync?: (activityData: any, token: string) => Promise<ActivityArgData<any, any>>;
     /** Add extra footer item */
     FooterItem?: React.ReactNode;
     /** A callback to run after the activity is posted successfully */

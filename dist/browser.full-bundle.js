@@ -102005,7 +102005,7 @@
 	            , 2];
 	            return [4
 	            /*yield*/
-	            , this.props.modifyActivityDataAsync(activity)];
+	            , this.props.modifyActivityDataAsync(activity, this.props.token)];
 	          // y'all
 
 	          case 1:
