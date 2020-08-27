@@ -14,4 +14,4 @@ export declare function dataTransferItemsHaveFiles(items?: DataTransferItemList)
 export declare function dataTransferItemsToFiles(items?: DataTransferItemList): Promise<FileLike[]>;
 export declare function inputValueFromEvent(event?: (React.SyntheticEvent<HTMLTextAreaElement> | null | undefined) | (Event | null | undefined)): string | null | undefined;
 export declare function sanitizeURL(url?: string): string | undefined;
-export declare const textRenderer: (text: string, parentClass: string, onClickMention?: (word: string) => unknown, onClickHashtag?: (word: string) => unknown, wrapHashtag?: (hashtagJSX: React.ReactNode) => React.ReactNode, wrapMention?: (hashtagJSX: React.ReactNode) => React.ReactNode) => {};
+export declare const textRenderer: (text: string, parentClass: string, onClickMention?: (word: string) => unknown, onClickHashtag?: (word: string) => unknown, wrapHashtag?: (node: React.ReactNode, text: string) => React.ReactNode, wrapMention?: (node: React.ReactNode, text: string) => React.ReactNode) => {};

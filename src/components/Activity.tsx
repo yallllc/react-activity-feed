@@ -29,13 +29,13 @@ type Props = {
   onClickHashtag?: (word: string) => unknown;
 
   // y'all - provide a way to add a next Link
-  wrapHashtag?: (hashtagJSX: ReactNode) => ReactNode;
+  wrapHashtag?: (node: ReactNode, text: string) => ReactNode;
 
   /** Handler for any routing you may do on clicks on Mentions */
   onClickMention?: (word: string) => unknown;
 
   // y'all - provide a way to add a next Link
-  wrapMention?: (hashtagJSX: ReactNode) => ReactNode;
+  wrapMention?: (node: ReactNode, text: string) => ReactNode;
 };
 
 /**

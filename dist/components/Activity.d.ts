@@ -11,10 +11,10 @@ declare type Props = {
     activity: ActivityData;
     /** Handler for any routing you may do on clicks on Hashtags */
     onClickHashtag?: (word: string) => unknown;
-    wrapHashtag?: (hashtagJSX: ReactNode) => ReactNode;
+    wrapHashtag?: (node: ReactNode, text: string) => ReactNode;
     /** Handler for any routing you may do on clicks on Mentions */
     onClickMention?: (word: string) => unknown;
-    wrapMention?: (hashtagJSX: ReactNode) => ReactNode;
+    wrapMention?: (node: ReactNode, text: string) => ReactNode;
 };
 declare const _default: React.FC<Props>;
 export default _default;

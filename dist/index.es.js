@@ -1242,7 +1242,7 @@ var textRenderer = function textRenderer(text, parentClass, onClickMention, onCl
         },
         className: parentClass + "__mention"
       }, "@", mention_1[0]), !word.endsWith(mention_1[0]) && word.slice(word.indexOf(mention_1[0]) + mention_1[0].length));
-      return wrapMention ? wrapMention(jsx) : jsx;
+      return wrapMention ? wrapMention(jsx, mention_1[0]) : jsx;
     } else if (onClickHashtag && word.includes('#')) {
       var hashtag_1 = twitter.extractHashtags(word);
       if (!hashtag_1.length) return word;
@@ -1254,7 +1254,7 @@ var textRenderer = function textRenderer(text, parentClass, onClickMention, onCl
         },
         className: parentClass + "__hashtag"
       }, "#", hashtag_1[0]), !word.endsWith(hashtag_1[0]) && word.slice(word.indexOf(hashtag_1[0]) + hashtag_1[0].length));
-      return wrapHashtag ? wrapHashtag(jsx) : jsx;
+      return wrapHashtag ? wrapHashtag(jsx, hashtag_1[0]) : jsx;
     }
 
     if (anchorme.validate.url(word) || anchorme.validate.email(word)) {
