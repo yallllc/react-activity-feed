@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import Avatar from './Avatar';
 import Flex from './Flex';
 import { Comment } from '../types';
@@ -14,8 +14,14 @@ export type Props = {
   /** Handler for any routing you may do on clicks on Hashtags */
   onClickHashtag?: (word: string) => unknown;
 
+  // y'all - provide a way to add a next Link
+  wrapHashtag?: (hashtagJSX: ReactNode) => ReactNode;
+
   /** Handler for any routing you may do on clicks on Mentions */
   onClickMention?: (word: string) => unknown;
+
+  // y'all - provide a way to add a next Link
+  wrapMention?: (hashtagJSX: ReactNode) => ReactNode;
 };
 
 /**
@@ -73,6 +79,8 @@ class CommentItem extends React.Component<Props & Streami18Ctx> {
                 'raf-comment-item',
                 this.props.onClickMention,
                 this.props.onClickHashtag,
+                this.props.wrapHashtag,
+                this.props.wrapMention,
               )}
             </p>
           </div>

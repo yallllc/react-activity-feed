@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { ActivityData, Renderable } from '../types';
 declare type Props = {
     Header?: Renderable;
@@ -11,8 +11,10 @@ declare type Props = {
     activity: ActivityData;
     /** Handler for any routing you may do on clicks on Hashtags */
     onClickHashtag?: (word: string) => unknown;
+    wrapHashtag?: (hashtagJSX: ReactNode) => ReactNode;
     /** Handler for any routing you may do on clicks on Mentions */
     onClickMention?: (word: string) => unknown;
+    wrapMention?: (hashtagJSX: ReactNode) => ReactNode;
 };
 declare const _default: React.FC<Props>;
 export default _default;

@@ -219,6 +219,8 @@ export const textRenderer = (
   parentClass: string,
   onClickMention?: (word: string) => unknown,
   onClickHashtag?: (word: string) => unknown,
+  wrapHashtag?: (hashtagJSX: React.ReactNode) => React.ReactNode,
+  wrapMention?: (hashtagJSX: React.ReactNode) => React.ReactNode,
 ) => {
   if (text === undefined) return;
   return text
@@ -228,7 +230,7 @@ export const textRenderer = (
         const mention = twitter.extractMentions(word);
         if (!mention.length) return word;
 
-        return (
+        const jsx = (
           <React.Fragment key={`item-${i}`}>
             {!word.startsWith(`@${mention[0]}`) &&
               word.slice(0, word.indexOf(mention[0]) - 1)}
@@ -242,11 +244,12 @@ export const textRenderer = (
               word.slice(word.indexOf(mention[0]) + mention[0].length)}
           </React.Fragment>
         );
+        return wrapMention ? wrapMention(jsx) : jsx;
       } else if (onClickHashtag && word.includes('#')) {
         const hashtag = twitter.extractHashtags(word);
         if (!hashtag.length) return word;
 
-        return (
+        const jsx = (
           <React.Fragment key={`item-${i}`}>
             {!word.startsWith(`#${hashtag[0]}`) &&
               word.slice(0, word.indexOf(hashtag[0]) - 1)}
@@ -260,6 +263,7 @@ export const textRenderer = (
               word.slice(word.indexOf(hashtag[0]) + hashtag[0].length)}
           </React.Fragment>
         );
+        return wrapHashtag ? wrapHashtag(jsx) : jsx;
       }
       if (anchorme.validate.url(word) || anchorme.validate.email(word)) {
         const link = anchorme(word, { list: true });

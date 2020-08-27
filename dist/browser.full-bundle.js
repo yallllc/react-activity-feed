@@ -29426,13 +29426,13 @@
 
 	  return undefined;
 	}
-	var textRenderer = function textRenderer(text, parentClass, onClickMention, onClickHashtag) {
+	var textRenderer = function textRenderer(text, parentClass, onClickMention, onClickHashtag, wrapHashtag, wrapMention) {
 	  if (text === undefined) return;
 	  return text.split(' ').map(function (word, i) {
 	    if (onClickMention && word.includes('@')) {
 	      var mention_1 = twitter.extractMentions(word);
 	      if (!mention_1.length) return word;
-	      return /*#__PURE__*/React.createElement(React.Fragment, {
+	      var jsx = /*#__PURE__*/React.createElement(React.Fragment, {
 	        key: "item-" + i
 	      }, !word.startsWith("@" + mention_1[0]) && word.slice(0, word.indexOf(mention_1[0]) - 1), /*#__PURE__*/React.createElement("a", {
 	        onClick: function onClick() {
@@ -29440,10 +29440,11 @@
 	        },
 	        className: parentClass + "__mention"
 	      }, "@", mention_1[0]), !word.endsWith(mention_1[0]) && word.slice(word.indexOf(mention_1[0]) + mention_1[0].length));
+	      return wrapMention ? wrapMention(jsx) : jsx;
 	    } else if (onClickHashtag && word.includes('#')) {
 	      var hashtag_1 = twitter.extractHashtags(word);
 	      if (!hashtag_1.length) return word;
-	      return /*#__PURE__*/React.createElement(React.Fragment, {
+	      var jsx = /*#__PURE__*/React.createElement(React.Fragment, {
 	        key: "item-" + i
 	      }, !word.startsWith("#" + hashtag_1[0]) && word.slice(0, word.indexOf(hashtag_1[0]) - 1), /*#__PURE__*/React.createElement("a", {
 	        onClick: function onClick() {
@@ -29451,6 +29452,7 @@
 	        },
 	        className: parentClass + "__hashtag"
 	      }, "#", hashtag_1[0]), !word.endsWith(hashtag_1[0]) && word.slice(word.indexOf(hashtag_1[0]) + hashtag_1[0].length));
+	      return wrapHashtag ? wrapHashtag(jsx) : jsx;
 	    }
 
 	    if (anchorme.validate.url(word) || anchorme.validate.email(word)) {
@@ -45578,7 +45580,7 @@
 	        style: {
 	          padding: '8px 16px'
 	        }
-	      }, /*#__PURE__*/React__default['default'].createElement("p", null, textRenderer(text, 'raf-activity', _this.props.onClickMention, _this.props.onClickHashtag))), _this.props.activity.verb === 'repost' && _this.props.activity.object instanceof Object && /*#__PURE__*/React__default['default'].createElement(Card, _this.props.activity.object.data), attachments && attachments.og && Object.keys(attachments.og).length > 0 && /*#__PURE__*/React__default['default'].createElement("div", {
+	      }, /*#__PURE__*/React__default['default'].createElement("p", null, textRenderer(text, 'raf-activity', _this.props.onClickMention, _this.props.onClickHashtag, _this.props.wrapHashtag, _this.props.wrapMention))), _this.props.activity.verb === 'repost' && _this.props.activity.object instanceof Object && /*#__PURE__*/React__default['default'].createElement(Card, _this.props.activity.object.data), attachments && attachments.og && Object.keys(attachments.og).length > 0 && /*#__PURE__*/React__default['default'].createElement("div", {
 	        style: {
 	          padding: '8px 16px'
 	        }
@@ -103326,7 +103328,7 @@
 	    }, /*#__PURE__*/React__default['default'].createElement("small", null, humanizeTimestamp(comment.created_at, tDateTimeParser))), /*#__PURE__*/React__default['default'].createElement("p", null, /*#__PURE__*/React__default['default'].createElement("span", {
 	      onClick: this._getOnClickUser(),
 	      className: "raf-comment-item__author"
-	    }, comment.user.data.name), ' ', textRenderer(comment.data.text, 'raf-comment-item', this.props.onClickMention, this.props.onClickHashtag)))));
+	    }, comment.user.data.name), ' ', textRenderer(comment.data.text, 'raf-comment-item', this.props.onClickMention, this.props.onClickHashtag, this.props.wrapHashtag, this.props.wrapMention)))));
 	  };
 
 	  return CommentItem;
